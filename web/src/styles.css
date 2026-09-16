@@ -360,8 +360,5 @@ a { color: inherit; text-decoration: none; }
   font-size: var(--text-xs); color: oklch(62% 0 0);
 }
 
-/* ---------- gsap reveal initial states ---------- */
-.js .reveal { opacity: 0; }
-@media (prefers-reduced-motion: reduce) {
-  .js .reveal { opacity: 1; }
-}
+/* GSAP 动效在元素进入视口时用 gsap.from() 介入;
+   不在 CSS 里预隐藏内容 —— JS 失败时页面保持完全可读(渐进增强)。 */

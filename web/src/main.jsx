@@ -33,21 +33,22 @@ async function initMotion() {
         gsap.set('.reveal', { opacity: 1 })
         return
       }
-      // hero:序贯 rise
+      // hero:序贯 rise(from 只在动画创建时设初值)
       gsap.from('.hero .reveal', {
         y: 28, autoAlpha: 0, stagger: 0.12, duration: 0.8,
       })
-      // 先设初值,再建 batch(顺序不能反,否则初始视口内的元素会被 set 回隐藏)
-      gsap.set(['.research .reveal', '.product .reveal', '.cta .reveal'], {
-        y: 24, autoAlpha: 0,
-      })
+      // 研究行/产品区/CTA:进入视口时 from() rise-in。
+      // 不做任何预隐藏 —— batch 未触发或 JS 失败时内容默认可见。
       ScrollTrigger.batch(
         ['.research .reveal', '.product .reveal', '.cta .reveal'].join(','),
         {
-          start: 'top 88%',
+          start: 'top 92%',
           once: true,
           onEnter: (batch) =>
-            gsap.to(batch, { y: 0, autoAlpha: 1, stagger: 0.1, overwrite: true }),
+            gsap.from(batch, {
+              y: 24, autoAlpha: 0, stagger: 0.1,
+              duration: 0.6, overwrite: true,
+            }),
         },
       )
     },
