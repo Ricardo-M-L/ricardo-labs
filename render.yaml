@@ -1,0 +1,16 @@
+# Render Blueprint:按《React 与 Go 或 Rust 完整应用免费部署方案》创建 Web Service。
+# 本站为静态展示站,无业务数据,暂不需要 Supabase 数据库;
+# 若后续增加留言/统计等业务,再按文档第 6 节第二步接入。
+services:
+  - type: web
+    name: ricardo-labs
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: PORT
+        value: 8080
