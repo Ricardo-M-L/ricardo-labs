@@ -1,0 +1,13 @@
+{
+  "name": "ricardo-labs-worker",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "npm run build:web && wrangler deploy",
+    "build:web": "VITE_BASE=/ npm --prefix ../web run build"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
