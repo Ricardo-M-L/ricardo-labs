@@ -1,2 +1,2 @@
-/* Hallmark · tokens for studied-DNA build (openai.com-inspired) */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+/* tokens: fonts only — colors/spacing live in styles.css :root (ui-ux-pro-max system) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
