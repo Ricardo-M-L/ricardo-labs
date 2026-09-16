@@ -2,101 +2,138 @@ import React from 'react'
 
 const GITHUB = 'https://github.com/Ricardo-M-L'
 
-const Arrow = ({ size = 14 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="none" aria-hidden="true">
-    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+/* ---------- 小图标 ---------- */
+const Arrow = () => (
+  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M3.2 8h9.6M8.6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+const Ext = () => (
+  <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M6 3h7v7M13 3 5 11M11 9v4H3V5h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 )
 
-const GithubMark = ({ size = 15 }) => (
-  <svg width={size} height={size} viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+/* ---------- 卡片插画:两色编辑风格,不用渐变糊 ---------- */
+const ArtScopes = () => (
+  <svg viewBox="0 0 320 132" role="img" aria-label="Fiber 作用域树">
+    <g fill="none" stroke="rgba(20,20,19,.55)" strokeWidth="1.2">
+      <rect x="10" y="12" width="300" height="26" rx="4" />
+      <rect x="26" y="52" width="130" height="26" rx="4" />
+      <rect x="170" y="52" width="140" height="26" rx="4" />
+      <rect x="42" y="92" width="98" height="26" rx="4" />
+      <rect x="186" y="92" width="108" height="26" rx="4" />
+      <path d="M160 38v14M91 66v12M240 66v12M91 78v14M240 78v14" />
+    </g>
+    <g fontSize="10.5" fontFamily="JetBrains Mono, monospace" fill="rgba(20,20,19,.82)">
+      <text x="18" y="29">root · Context</text>
+      <text x="34" y="69">loader</text>
+      <text x="178" y="69">timer</text>
+      <text x="50" y="109">hmr</text>
+      <text x="194" y="109">logger</text>
+    </g>
+    <circle cx="160" cy="38" r="3" fill="#c6613f" />
   </svg>
 )
 
+const ArtRetrieval = () => (
+  <svg viewBox="0 0 320 132" role="img" aria-label="混合检索打分">
+    {[
+      ['BM25 · 0.91', 0.91, '#c6613f'],
+      ['vector · 0.78', 0.78, '#3d3d3a'],
+      ['recency · 0.64', 0.64, '#788c5d'],
+      ['importance · 0.52', 0.52, '#6a9bcc'],
+    ].map(([label, v, color], i) => (
+      <g key={label} transform={`translate(0 ${14 + i * 30})`}>
+        <text x="0" y="10" fontSize="10.5" fontFamily="JetBrains Mono, monospace" fill="rgba(20,20,19,.72)">{label}</text>
+        <rect x="118" y="2" width="180" height="5" rx="2.5" fill="rgba(20,20,19,.12)" />
+        <rect x="118" y="2" width={180 * v} height="5" rx="2.5" fill={color} />
+      </g>
+    ))}
+  </svg>
+)
+
+const ArtFutures = () => (
+  <svg viewBox="0 0 320 132" role="img" aria-label="候选未来分支与提交门">
+    <g fill="none" stroke="rgba(20,20,19,.5)" strokeWidth="1.2">
+      <path d="M20 66h58" />
+      <path d="M78 66c34 0 34-40 68-40h60" />
+      <path d="M78 66h128" />
+      <path d="M78 66c34 0 34 40 68 40h60" />
+      <path d="M206 26h64M206 66h64M206 106h64" />
+    </g>
+    <g fontSize="10.5" fontFamily="JetBrains Mono, monospace" fill="rgba(20,20,19,.8)">
+      <text x="14" y="52">intent</text>
+      <text x="86" y="20">future A</text>
+      <text x="86" y="60">future B</text>
+      <text x="86" y="100">future C</text>
+      <text x="212" y="30">outcome</text>
+      <text x="212" y="70">outcome</text>
+      <text x="212" y="110">outcome</text>
+    </g>
+    <g>
+      <circle cx="78" cy="66" r="3.5" fill="#c6613f" />
+      <rect x="250" y="58" width="16" height="16" rx="3" fill="none" stroke="#c6613f" strokeWidth="1.4" />
+      <path d="M254 66l3 3 5-6" stroke="#c6613f" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+    </g>
+  </svg>
+)
+
+/* ---------- 内容(全部为项目事实) ---------- */
+const NL = '\n'
 const PRODUCTS = [
   {
-    id: 'cordis-di', no: '01', name: 'cordis-di',
-    zh: '类型化插件与依赖注入框架 — Rust',
-    desc: '插件生命周期成为确定性契约:Fiber 作用域、分层 Context、四种事件派发、失败自动回滚的 staged reload。9 个独立 crate,已发布 crates.io。',
-    featured: true,
-    links: [
-      ['GitHub', 'https://github.com/Ricardo-M-L/cordis-di'],
-      ['crates.io', 'https://crates.io/crates/cordis-di-core'],
-      ['docs.rs', 'https://docs.rs/cordis-di-core'],
-    ],
-    features: [
-      ['Fiber 生命周期', 'RAII 句柄 + LIFO 清理,作用域结束即回收全部副作用。'],
-      ['分层 Context', '显式类型与注册工厂取代 Proxy 魔法,查找在编译期检查。'],
-      ['事件总线', 'serial / bail / waterfall / parallel 四种派发模式。'],
-      ['Staged Reload', 'reload 失败先回滚新作用域,保留旧运行时。'],
-    ],
-    code: `use cordis_di_core::{disposer, Fiber};
-
-let fiber = Fiber::new();
-let _e = fiber.effect(|| {
-    disposer(|| println!("scope ended"))
-});
-fiber.dispose(); // LIFO 回收`,
+    id: 'cordis-di', tone: 't-oat', label: '01 · Rust · crates.io',
+    title: 'cordis-di', desc: '类型化插件与依赖注入。Fiber 生命周期把"什么时候清理"变成确定性契约,staged reload 失败会先回滚新作用域、保住旧运行时。',
+    art: <ArtScopes />,
+    links: [['仓库', 'https://github.com/Ricardo-M-L/cordis-di'], ['crate', 'https://crates.io/crates/cordis-di-core']],
   },
   {
-    id: 'agent-memory', no: '02', name: 'agent-memory',
-    zh: 'Agent 持久化记忆 — Rust · SQLite/Neo4j',
-    desc: '不搭数据库服务即可保存事实、混合检索、查询实体图谱;supersede 显式演化记忆,历史全部可审计。v0.1.1 · MIT。',
-    featured: false,
-    links: [['GitHub', 'https://github.com/Ricardo-M-L/agent-memory']],
-    features: [
-      ['三类记忆', '工作/情景/语义,SQLite 持久化,默认离线。'],
-      ['混合检索', 'BM25 + 特征哈希向量,时效/相关度/重要性加权。'],
-      ['事实演化', 'replace_relation 自动失效旧边,可回溯。'],
-      ['实体图谱', '多跳路径、连通分量、可选 Neo4j 后端。'],
-    ],
-    code: `let mem = AgentMemory::open("agent.db")?;
-let old = mem.remember_fact(
-    Scope::User, "alice", "…Beijing")?;
-mem.supersede(Scope::User, "alice",
-    old.id, "…Shanghai")?;`,
+    id: 'agent-memory', tone: 't-manilla', label: '02 · Rust · SQLite',
+    title: 'agent-memory', desc: '不搭数据库服务就能存事实:混合检索（BM25 + 向量）加权时效与重要性,supersede 显式演化记忆,历史全程可审计。',
+    art: <ArtRetrieval />,
+    links: [['仓库', 'https://github.com/Ricardo-M-L/agent-memory']],
   },
   {
-    id: 'ifscape', no: '03', name: 'Ifscape',
-    zh: '后果工作室 · Living Atlas — TS + Rust',
-    desc: '指着工件表达意图,比较 2-4 个有界的孤立未来,检查证据后显式提交或回滚。推演结果永远标注 model-prediction。pre-alpha 本地预览。',
-    featured: false,
-    links: [['作者 GitHub', GITHUB]],
-    features: [
-      ['Living Atlas', '代码、时间线、演示与 3D 世界共用一套事务协议。'],
-      ['有界候选未来', '每次规划返回 2-4 个完整候选分支。'],
-      ['显式提交', '推荐只是建议,提交门只对人打开。'],
-      ['Tauri 信任边界', 'Rust 持有凭证,渲染层拿不到密钥。'],
-    ],
-    code: `意图 → 候选未来(2-4)
-→ 推荐(仅供参考)
-→ 人工显式选择
-→ 3 检查点 × 4 工件
-→ 提交 / 回滚`,
+    id: 'ifscape', tone: 't-kraft', label: '03 · TypeScript + Rust · 本地预览',
+    title: 'Ifscape', desc: '后果工作室:每次规划只给 2–4 个有界的候选未来,推演结果一律标注 model-prediction,提交门只对人打开。',
+    art: <ArtFutures />,
+    links: [['作者主页', GITHUB]],
   },
 ]
 
-const RESEARCH = [
-  ['R-01', '从 Proxy 到类型系统:cordis 的 Rust 移植史', 'JS 动态代理的魔法,到 Rust 变成显式工厂与生命周期契约。'],
-  ['R-02', 'Agent 记忆的三个时间尺度', '工作记忆撑住会话,情景记忆串起轨迹,语义记忆沉淀事实。'],
-  ['R-03', '把"未来"做成可审查的分支', 'Ifscape 事务协议:推演必须标注 model-prediction,提交门只对人开。'],
+const STAGE_CODE = [
+  [['// 作用域结束 → LIFO 回收全部副作用', 'cm']],
+  [['use ', 'kw'], ['cordis_di_core', 'fn'], ['::{disposer, Fiber};\n', '']],
+  ['\n'],
+  [['let ', 'kw'], ['fiber', ''], [' = ', ''], ['Fiber', 'fn'], ['::new();\n', '']],
+  [['let ', 'kw'], ['_e', ''], [' = fiber.', ''], ['effect', 'fn'], ['(|| {\n    ', '']],
+  [['disposer', 'fn'], ['(|| println!(', ''], ['"scope ended"', 'st'], ['))\n});\n\n', '']],
+  [['fiber.', ''], ['dispose', 'fn'], ['();  ', ''], ['// 清理顺序可预期', 'cm']],
 ]
 
+const NOTES = [
+  ['R-01', '#d97757', '从 Proxy 到类型系统:一次 DI 框架的 Rust 移植', 'JS 动态代理的魔法,到了 Rust 变成显式工厂、显式作用域和编译期可查的查找。', '工程笔记 · 9 月'],
+  ['R-02', '#6a9bcc', 'Agent 记忆的三个时间尺度', '工作记忆撑住一次会话,情景记忆串起整条轨迹,语义记忆沉淀可复用的事实。', '工程笔记 · 8 月'],
+  ['R-03', '#788c5d', '把"未来"做成可审查的分支', '推演不冒充预言:候选分支有界、结论标注来源、提交前必须有人点头。', '设计记录 · 8 月'],
+]
+
+/* ---------- 组件 ---------- */
 function Nav() {
   return (
     <header className="nav">
-      <a className="nav-logo" href="#top">RICARDO<b>·</b>LABS</a>
-      <nav className="nav-links" aria-label="主导航">
-        <a href="#products"><span className="n">01</span>产品</a>
-        <a href="#research"><span className="n">02</span>研究</a>
-        <a href="#cordis-di"><span className="n">03</span>cordis-di</a>
-        <a href="#agent-memory"><span className="n">04</span>agent-memory</a>
-        <a href="#ifscape"><span className="n">05</span>Ifscape</a>
-      </nav>
-      <div className="nav-cta">
-        <a className="btn btn-sm btn-ghost" href={GITHUB} target="_blank" rel="noreferrer">
-          <GithubMark size={13} /> GitHub
+      <div className="shell nav-in">
+        <a className="wordmark" href="#top">Ricardo Labs<em>.</em></a>
+        <nav className="nav-links" aria-label="主导航">
+          <a href="#products">产品</a>
+          <a href="#claim">关于</a>
+          <a href="#notes">笔记</a>
+          <a href="#cordis-di">cordis-di</a>
+          <a href="#agent-memory">agent-memory</a>
+          <a href="#ifscape">Ifscape</a>
+        </nav>
+        <a className="btn btn-primary btn-sm" href={GITHUB} target="_blank" rel="noreferrer">
+          GitHub <Ext />
         </a>
       </div>
     </header>
@@ -106,40 +143,58 @@ function Nav() {
 function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="wrap">
-        <div className="hero-grid">
-          <div className="hero-main">
-            <p className="hero-kicker">/// OPEN-SOURCE AGENT INFRASTRUCTURE</p>
-            <h1 className="hero-title">
-              装得稳<span className="gold">_</span><br />
-              记得住<span className="purple">_</span><br />
-              看得见后果<span className="gold">_</span>
-            </h1>
-            <p className="hero-sub">
-              三个开源项目,一套 Agent 工程主张:确定性生命周期、持久化记忆、可检查的未来。
-            </p>
-            <div className="hero-cta">
-              <a className="btn btn-gold" href="#products">浏览产品 <Arrow /></a>
-              <a className="btn btn-ghost" href={GITHUB} target="_blank" rel="noreferrer">
-                <GithubMark size={13} /> Ricardo-M-L
-              </a>
-            </div>
+      <div className="shell">
+        <h1>为 Agent 造地基:<i>装得稳</i>、<i>记得住</i>、看得见后果。</h1>
+        <p className="sub">
+          三个开源项目,三条工程主张——确定性生命周期、可审计的持久记忆、把推演变成可提交的分支。均以源码开放。
+        </p>
+        <div className="hero-act">
+          <a className="btn btn-primary" href="#products">浏览三个产品 <Arrow /></a>
+          <a className="btn btn-secondary" href="https://crates.io/crates/cordis-di-core" target="_blank" rel="noreferrer">
+            <span className="mono" style={{ fontSize: 14 }}>cargo add cordis-di-core</span>
+          </a>
+        </div>
+        <div className="hero-meta">
+          <span>MIT 许可</span>
+          <span>9 个 crate</span>
+          <span>77 个上游合并 PR</span>
+          <span>维护者 Ricardo-M-L</span>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function Stage() {
+  return (
+    <section className="shell stage" aria-label="cordis-di 生命周期">
+      <div className="stage-card">
+        <div className="stage-glow" />
+        <div className="stage-scrim" />
+        <div className="stage-grain" />
+        <div className="stage-copy">
+          <p className="detail">旗舰 · cordis-di</p>
+          <h2>每个副作用都有归属,每次重载都能退回。</h2>
+          <p>
+            Fiber 持有作用域内的全部资源,销毁按 LIFO 执行;reload 失败时,新作用域先回滚,旧运行时继续服务。
+            插件因此可以热插拔,而不是"重启试试"。
+          </p>
+          <div className="stage-badges">
+            <span className="badge">Fiber 生命周期</span>
+            <span className="badge">分层 Context</span>
+            <span className="badge">4 种事件派发</span>
+            <span className="badge">Staged reload</span>
           </div>
-          <aside className="hero-aside">
-            <div className="hero-install">
-              <p className="lbl">$ CARGO ADD</p>
-              <pre><code>{'cargo add cordis-di-core\ncargo install agent-memory'}</code></pre>
-            </div>
-            <div className="hero-stats">
-              <div className="hstat"><b>77</b><span>已合并上游 PR</span></div>
-              <div className="hstat"><b>3</b><span>开源产品</span></div>
-              <div className="hstat"><b>MIT</b><span>许可证</span></div>
-            </div>
-            <p className="hero-aside-note">
-              ragflow / ag2 / diffusers / pydantic-ai / unsloth / sglang …<br />
-              <em>长期贡献者,不是套壳营销页。</em>
-            </p>
-          </aside>
+        </div>
+        <div className="stage-code">
+          <div className="bar"><i /><i /><i /><span>src/main.rs — cordis-di</span></div>
+          <pre><code>
+            {STAGE_CODE.map((line, i) => (
+              <React.Fragment key={i}>
+                {Array.isArray(line) ? line.map(([t, c], j) => <span key={j} className={'s-' + c}>{t}</span>) : line}
+              </React.Fragment>
+            ))}
+          </code></pre>
         </div>
       </div>
     </section>
@@ -148,31 +203,23 @@ function Hero() {
 
 function Products() {
   return (
-    <section className="wrap" id="products">
-      <div className="section-head">
-        <h2>产品</h2>
-        <span className="tag">/// 03 PROJECTS</span>
+    <section className="shell releases" id="products">
+      <div className="sec-head">
+        <h2>三个项目</h2>
+        <a className="detail" href={GITHUB} target="_blank" rel="noreferrer">全部仓库 ↗</a>
       </div>
-      <div className="bento">
+      <div className="cards-3">
         {PRODUCTS.map(p => (
-          <article key={p.id} id={p.id} className={'prod' + (p.featured ? ' prod-featured' : '')}>
-            <span className="prod-no">[{p.no}]</span>
-            <h3>{p.name}</h3>
-            <p className="zh">{p.zh}</p>
-            <p className="desc">{p.desc}</p>
-            <div className="prod-links">
+          <article key={p.id} id={p.id} className={'rcard ' + p.tone}>
+            <p className="detail">{p.label}</p>
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+            <div className="art">{p.art}</div>
+            <div className="foot">
               {p.links.map(([l, h]) => (
-                <a key={l} className="chip" href={h} target="_blank" rel="noreferrer">{l} ↗</a>
+                <a key={l} href={h} target="_blank" rel="noreferrer">{l} <Arrow /></a>
               ))}
             </div>
-            <ul className="feat">
-              {p.features.map(([t, d]) => (
-                <li key={t}><span><strong>{t}</strong><span>{d}</span></span></li>
-              ))}
-            </ul>
-            <figure className="term">
-              <pre><code>{p.code}</code></pre>
-            </figure>
           </article>
         ))}
       </div>
@@ -180,18 +227,44 @@ function Products() {
   )
 }
 
-function Research() {
+function Claim() {
   return (
-    <section className="wrap" id="research">
-      <div className="section-head">
-        <h2>研究与笔记</h2>
-        <span className="tag">/// {String(RESEARCH.length).padStart(2, '0')} NOTES</span>
+    <section className="claim" id="claim">
+      <div className="shell claim-in">
+        <div>
+          <h2>把不确定性关进笼子,而不是假装它不存在。</h2>
+          <p>
+            模型给的是提议,不是真理。所以我们造的东西都遵循同一条规矩:状态变化要显式、要可回滚、要留下痕迹——
+            无论是插件的生命周期、记忆的演化,还是"未来"的分支。这些能力不靠提示词,靠代码结构。
+          </p>
+        </div>
+        <div className="stats">
+          <div className="stat"><b>77</b><span>已合并的上游 PR(agent 工具链生态)</span></div>
+          <div className="stat"><b>9</b><span>cordis-di 独立 crate,已发布 crates.io</span></div>
+          <div className="stat"><b>3</b><span>开源产品:框架 / 记忆 / 后果工作室</span></div>
+          <div className="stat"><b>MIT</b><span>许可,无商业限制</span></div>
+        </div>
       </div>
-      {RESEARCH.map(([no, t, d]) => (
-        <a key={no} className="row" href={'#' + no.toLowerCase()}>
-          <span className="row-no">{no}</span>
-          <span><h3>{t}</h3><p>{d}</p></span>
-          <span className="row-arr"><Arrow /></span>
+    </section>
+  )
+}
+
+function Notes() {
+  return (
+    <section className="shell notes" id="notes">
+      <div className="sec-head">
+        <h2>工程笔记</h2>
+        <a className="detail" href="#top">回到顶部 ↑</a>
+      </div>
+      {NOTES.map(([no, tint, title, desc, who]) => (
+        <a key={no} className="note" href={'#' + no.toLowerCase()}>
+          <span className="note-tile" style={{ background: tint }}>{no}</span>
+          <span>
+            <h3>{title}</h3>
+            <p>{desc}</p>
+          </span>
+          <span className="who">{who}</span>
+          <span className="go" style={{ color: 'rgba(20,20,19,.55)' }}><Arrow /></span>
         </a>
       ))}
     </section>
@@ -200,47 +273,48 @@ function Research() {
 
 function Cta() {
   return (
-    <div className="wrap">
-      <div className="cta-block">
-        <h2>模型给的是提议,不是真理。</h2>
-        <a className="btn btn-ink" href={GITHUB} target="_blank" rel="noreferrer">
-          <GithubMark size={13} /> 阅读源码
-        </a>
+    <section className="shell cta">
+      <h2>先读源码,再决定要不要用。</h2>
+      <p>三个项目都在公开仓库里,提交历史、测试与发布流程可查。欢迎在 issue 里直接挑战设计。</p>
+      <div className="cta-act">
+        <a className="btn btn-primary" href={GITHUB} target="_blank" rel="noreferrer">打开 GitHub <Ext /></a>
+        <a className="btn btn-secondary" href="https://docs.rs/cordis-di-core" target="_blank" rel="noreferrer">读文档</a>
       </div>
-    </div>
+    </section>
   )
 }
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="wrap">
-        <div className="footer-grid">
-          <div className="fcell">
-            <b>RICARDO·LABS</b>
-            <p>不追热点,只造 Agent 工程里真正缺的地基。装得稳、记得住、看得见后果。</p>
+      <div className="shell">
+        <div className="foot-top">
+          <div>
+            <p className="foot-brand">Ricardo Labs</p>
+            <p className="blurb">为 Agent 工程造地基:确定性生命周期、可审计记忆、可提交的推演。</p>
           </div>
-          <div className="fcell">
-            <b>产品</b>
+          <div>
+            <h4>产品</h4>
             <a href="#cordis-di">cordis-di</a>
             <a href="#agent-memory">agent-memory</a>
             <a href="#ifscape">Ifscape</a>
           </div>
-          <div className="fcell">
-            <b>仓库</b>
+          <div>
+            <h4>仓库</h4>
             <a href="https://github.com/Ricardo-M-L/cordis-di" target="_blank" rel="noreferrer">cordis-di ↗</a>
             <a href="https://github.com/Ricardo-M-L/agent-memory" target="_blank" rel="noreferrer">agent-memory ↗</a>
-            <a href={GITHUB} target="_blank" rel="noreferrer">Ricardo-M-L ↗</a>
+            <a href="https://crates.io/crates/cordis-di-core" target="_blank" rel="noreferrer">crates.io ↗</a>
           </div>
-          <div className="fcell">
-            <b>本站</b>
-            <a href="#research">研究笔记</a>
-            <a href="#top">回到顶部</a>
+          <div>
+            <h4>站点</h4>
+            <a href="#products">产品总览</a>
+            <a href="#notes">工程笔记</a>
+            <a href="#claim">关于本站</a>
           </div>
         </div>
-        <div className="footer-base">
-          <span>© 2026 RICARDO LABS · MIT</span>
-          <span>INTER / JETBRAINS MONO · BRUTALIST BUILD</span>
+        <div className="foot-base">
+          <span>© 2026 Ricardo Labs · MIT</span>
+          <span>版式参照 anthropic.com 实测骨架重建 · 字体 Source Serif 4 / DM Sans / JetBrains Mono</span>
         </div>
       </div>
     </footer>
@@ -252,8 +326,10 @@ export default function App() {
     <>
       <Nav />
       <Hero />
+      <Stage />
       <Products />
-      <Research />
+      <Claim />
+      <Notes />
       <Cta />
       <Footer />
     </>

@@ -1,2 +1,65 @@
-/* tokens: fonts only — colors/spacing live in styles.css :root (ui-ux-pro-max system) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap');
+/* 设计 DNA:真实 Chrome 抓取 www.anthropic.com 计算样式与 CSS 变量(/tmp/anth-dna.json)
+ * 色板(原站 --swatch--*): ivory-light #faf9f5 / ivory-medium #f0eee6 / ivory-dark #e8e6dc
+ *   slate-dark #141413 / slate-medium #3d3d3a / slate-light #5e5d59
+ *   cloud-light #d1cfc5 / cloud-medium #b0aea5 / cloud-dark #87867f
+ *   clay #d97757 / accent #c6613f / oat #e3dacc / manilla #ebdbbc / kraft #d4a27f
+ *   cactus #bcd1ca / sky #6a9bcc / heather #cbcadb / fig #c46686 / coral #ebcece / olive #788c5d
+ * 圆角: small .25rem / main .5rem / large 1rem / card 1.5rem / round 100vw
+ * 字体: Anthropic Serif(→ Source Serif 4 + Georgia 兜底) / Anthropic Sans(→ DM Sans) / Anthropic Mono(→ JetBrains Mono,原站也加载了它)
+ * 版式: 正文 20px/1.4 衬线 · 栅格 --site--width 89.5rem(1432) 12 列 · 侧距 clamp(2rem,…,5rem)
+ *       按钮: 主 = 深底浅字胶囊,次 = 描边透明,三级 = 弱描边
+ */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* swatches(原名照搬) */
+  --ivory-light: #faf9f5;
+  --ivory-medium: #f0eee6;
+  --ivory-dark: #e8e6dc;
+  --slate-dark: #141413;
+  --slate-medium: #3d3d3a;
+  --slate-light: #5e5d59;
+  --cloud-light: #d1cfc5;
+  --cloud-medium: #b0aea5;
+  --cloud-dark: #87867f;
+  --clay: #d97757;
+  --accent: #c6613f;
+  --oat: #e3dacc;
+  --manilla: #ebdbbc;
+  --kraft: #d4a27f;
+  --cactus: #bcd1ca;
+  --sky: #6a9bcc;
+  --heather: #cbcadb;
+  --fig: #c46686;
+  --coral: #ebcece;
+  --olive: #788c5d;
+
+  --bg: var(--ivory-light);
+  --bg-2: var(--ivory-medium);
+  --fg: var(--slate-dark);
+  --fg-2: var(--slate-light);
+  --fg-3: var(--cloud-dark);
+  --border: rgba(20, 20, 19, 0.10);
+  --border-strong: rgba(20, 20, 19, 0.20);
+  --faded: rgba(20, 20, 19, 0.06);
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --radius-card: 24px;
+  --radius-round: 100vw;
+
+  --font-serif: "Source Serif 4", Georgia, "Songti SC", serif;
+  --font-sans: "DM Sans", "PingFang SC", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  --site-width: 89.5rem;
+  --margin: clamp(2rem, 1.0816rem + 3.918vw, 5rem);
+  --gutter: 2rem;
+
+  --fs-body: 20px;
+  --fs-detail: 14px;
+  --fs-display-s: 1.5rem;
+  --fs-display-m: 2rem;
+  --fs-display-l: 3rem;
+}
