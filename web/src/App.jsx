@@ -449,6 +449,24 @@ function Footer() {
 }
 
 export default function App() {
+  // 深链修复:浏览器解析 #anchor 发生在 React 挂载之前,那时目标元素还不存在,
+  // 所以首次打开 .../#products 会停在页顶。挂载后自己补一次跳转(减去 sticky 顶栏高度)。
+  React.useEffect(() => {
+    const jump = () => {
+      const h = window.location.hash
+      if (h.length < 2) return
+      let el = null
+      try { el = document.querySelector(h) } catch { return }
+      if (!el) return
+      const y = el.getBoundingClientRect().top + window.scrollY - 92
+      window.scrollTo({ top: Math.max(0, y), behavior: 'instant' })
+    }
+    jump()
+    const raf = requestAnimationFrame(jump)
+    const t = window.setTimeout(jump, 400)   // 等字体加载完、布局稳定后再校正一次
+    return () => { cancelAnimationFrame(raf); window.clearTimeout(t) }
+  }, [])
+
   return (
     <>
       <Nav />
