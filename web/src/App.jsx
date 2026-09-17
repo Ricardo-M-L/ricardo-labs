@@ -119,22 +119,112 @@ const NOTES = [
 ]
 
 /* ---------- 组件 ---------- */
+const METIS = 'https://github.com/Ricardo-M-L/metis'
+
+/* 顶栏下拉大菜单:分栏 = 产品 / 源码 / metis(实测参照:链接 16px 衬线,分栏右对齐) */
+const MENU = [
+  ['产品', [
+    ['cordis-di', '#cordis-di'],
+    ['agent-memory', '#agent-memory'],
+    ['Ifscape', '#ifscape'],
+    ['metis', METIS],
+  ]],
+  ['源码', [
+    ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
+    ['agent-memory 仓库', 'https://github.com/Ricardo-M-L/agent-memory'],
+    ['metis 仓库', METIS],
+    ['crates.io · cordis-di-core', 'https://crates.io/crates/cordis-di-core'],
+  ]],
+  ['metis', [
+    ['最新版本 v0.4.59', METIS + '/releases/latest'],
+    ['README', METIS + '#readme'],
+    ['Issues', METIS + '/issues'],
+    ['作者主页', GITHUB],
+  ]],
+]
+
+const Caret = () => (
+  <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+    <path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
+const GithubMark = () => (
+  <svg width="21" height="21" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+  </svg>
+)
+
+const isExt = (href) => !href.startsWith('#')
+
 function Nav() {
+  const [open, setOpen] = React.useState(false)
+  const [scrolled, setScrolled] = React.useState(false)
+  const wrap = React.useRef(null)
+
+  React.useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 120)
+    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
+    const onDoc = (e) => { if (wrap.current && !wrap.current.contains(e.target)) setOpen(false) }
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    document.addEventListener('keydown', onKey)
+    document.addEventListener('click', onDoc)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('keydown', onKey)
+      document.removeEventListener('click', onDoc)
+    }
+  }, [])
+
+  const byHover = React.useRef(false)
+  const hoverOpen = () => { byHover.current = true; setOpen(true) }
+  const clickToggle = () => {
+    if (byHover.current) { byHover.current = false; return }  // 悬停已开,点击不再关掉
+    setOpen((v) => !v)
+  }
+
   return (
-    <header className="nav">
+    <header
+      className={'nav' + (scrolled ? ' is-scrolled' : '')}
+      ref={wrap}
+      onMouseLeave={() => { byHover.current = false; setOpen(false) }}
+    >
       <div className="shell nav-in">
         <a className="wordmark" href="#top">Ricardo Labs<em>.</em></a>
-        <nav className="nav-links" aria-label="主导航">
-          <a href="#products">产品</a>
-          <a href="#claim">关于</a>
-          <a href="#notes">笔记</a>
-          <a href="#cordis-di">cordis-di</a>
-          <a href="#agent-memory">agent-memory</a>
-          <a href="#ifscape">Ifscape</a>
-        </nav>
-        <a className="btn btn-primary btn-sm" href={GITHUB} target="_blank" rel="noreferrer">
-          GitHub <Ext />
-        </a>
+        <div className="nav-right">
+          <nav className="nav-links" aria-label="主导航">
+            <button
+              type="button"
+              className="nav-trigger"
+              aria-expanded={open}
+              aria-haspopup="true"
+              onClick={clickToggle}
+              onMouseEnter={hoverOpen}
+            >
+              产品 <Caret />
+            </button>
+            <a href="#notes">笔记</a>
+            <a href="#claim">关于</a>
+          </nav>
+          <a className="nav-cta" href={GITHUB} target="_blank" rel="noreferrer">
+            GitHub <Ext />
+          </a>
+        </div>
+      </div>
+      <div className="nav-panel" hidden={!open}>
+        <div className="shell nav-panel-in">
+          {MENU.map(([head, items]) => (
+            <div className="nav-group" key={head}>
+              <p className="nav-group-head">{head}</p>
+              {items.map(([label, href]) => (
+                <a key={label} href={href}
+                  {...(isExt(href) ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  onClick={() => setOpen(false)}>{label} ↗</a>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </header>
   )
@@ -284,38 +374,74 @@ function Cta() {
   )
 }
 
+/* 页脚四栏(实测参照:栏宽 215/间隔 31.5,标题 12px/500,链接 12px #b0aea5;
+ * 参照首栏堆叠两组,故「产品」栏再叠一组「资源」) */
+const FOOT = [
+  [
+    ['产品', [
+      ['cordis-di', '#cordis-di'],
+      ['agent-memory', '#agent-memory'],
+      ['Ifscape', '#ifscape'],
+      ['metis', METIS],
+    ]],
+    ['资源', [
+      ['crates.io · cordis-di-core', 'https://crates.io/crates/cordis-di-core'],
+      ['docs.rs · cordis-di-core', 'https://docs.rs/cordis-di-core'],
+      ['全部仓库', GITHUB],
+    ]],
+  ],
+  [
+    ['源码', [
+      ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
+      ['agent-memory 仓库', 'https://github.com/Ricardo-M-L/agent-memory'],
+      ['metis 仓库', METIS],
+      ['metis 发布记录', METIS + '/releases'],
+    ]],
+  ],
+  [
+    ['metis', [
+      ['最新版本 v0.4.59', METIS + '/releases/latest'],
+      ['README', METIS + '#readme'],
+      ['Issues', METIS + '/issues'],
+      ['作者主页', GITHUB],
+    ]],
+  ],
+  [
+    ['站点', [
+      ['产品总览', '#products'],
+      ['工程笔记', '#notes'],
+      ['关于本站', '#claim'],
+      ['回到顶部', '#top'],
+    ]],
+  ],
+]
+
 function Footer() {
   return (
     <footer className="footer">
-      <div className="shell">
-        <div className="foot-top">
-          <div>
-            <p className="foot-brand">Ricardo Labs</p>
-            <p className="blurb">为 Agent 工程造地基:确定性生命周期、可审计记忆、可提交的推演。</p>
-          </div>
-          <div>
-            <h4>产品</h4>
-            <a href="#cordis-di">cordis-di</a>
-            <a href="#agent-memory">agent-memory</a>
-            <a href="#ifscape">Ifscape</a>
-          </div>
-          <div>
-            <h4>仓库</h4>
-            <a href="https://github.com/Ricardo-M-L/cordis-di" target="_blank" rel="noreferrer">cordis-di ↗</a>
-            <a href="https://github.com/Ricardo-M-L/agent-memory" target="_blank" rel="noreferrer">agent-memory ↗</a>
-            <a href="https://crates.io/crates/cordis-di-core" target="_blank" rel="noreferrer">crates.io ↗</a>
-          </div>
-          <div>
-            <h4>站点</h4>
-            <a href="#products">产品总览</a>
-            <a href="#notes">工程笔记</a>
-            <a href="#claim">关于本站</a>
+      <div className="shell foot-top">
+        <div className="foot-brandcol">
+          <p className="foot-brand">Ricardo Labs</p>
+          <p className="blurb">为 Agent 工程造地基:确定性生命周期、可审计记忆、可提交的推演,以及一个本地优先的 Agent CLI。</p>
+          <p className="foot-copy">© 2026 Ricardo Labs · cordis-di / agent-memory / Ifscape 为 MIT 许可</p>
+          <div className="foot-social">
+            <a href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubMark /></a>
           </div>
         </div>
-        <div className="foot-base">
-          <span>© 2026 Ricardo Labs · MIT</span>
-          <span>版式参照 anthropic.com 实测骨架重建 · 字体 Source Serif 4 / DM Sans / JetBrains Mono</span>
-        </div>
+        {FOOT.map((groups) => (
+          <div key={groups[0][0]}>
+            {groups.map(([head, items]) => (
+              <div className="foot-group" key={head}>
+                <h3 className="foot-head">{head}</h3>
+                {items.map(([label, href]) => (
+                  <a key={label} href={href} {...(isExt(href) ? { target: '_blank', rel: 'noreferrer' } : {})}>
+                    {label}{isExt(href) ? ' ↗' : ''}
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </footer>
   )

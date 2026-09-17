@@ -45,23 +45,61 @@ img, svg { display: block; max-width: 100%; }
 .btn-tertiary:hover { border-color: var(--slate-dark); }
 .btn-sm { font-size: 14px; padding: 11px 20px; }
 
-/* ---------- 导航 ---------- */
+/* ---------- 导航:anthropic 实测骨架 ----------
+ * 栏高 68px sticky · 词标槽位 144px · 顶层链接 20px 衬线/字重 400/padding 22.4px 12px
+ * 右侧 CTA:34px 高、16px 无衬线、象牙白字、8px 圆角深色药丸
+ * 下拉:满宽象牙白面板,开在 68px 以下,分栏 202px、右对齐(参照面板列位 x=703…1337)
+ */
 .nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(250, 249, 245, 0.86);
+  position: sticky; top: 0; z-index: 1000;
+  background: transparent; box-shadow: 0 1px 0 rgba(0, 0, 0, 0);
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+.nav.is-scrolled {
+  background: rgba(250, 249, 245, 0.92);
   backdrop-filter: saturate(160%) blur(12px);
-  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 var(--border);
 }
-.nav-in { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 68px; }
-.wordmark { font-family: var(--font-serif); font-size: 21px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
+.nav-in { display: flex; align-items: center; height: 68px; }
+.wordmark {
+  font-family: var(--font-serif); font-size: 21px; font-weight: 400;
+  letter-spacing: -0.01em; white-space: nowrap; width: 144px;
+}
 .wordmark em { font-style: normal; color: var(--accent); }
-.nav-links { display: flex; gap: 4px; }
-.nav-links a {
-  font-size: 17px; padding: 8px 14px; border-radius: var(--radius-round);
-  transition: background 180ms ease;
+.nav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+.nav-links { display: flex; align-items: center; }
+.nav-links > a, .nav-trigger {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-serif); font-size: 20px; font-weight: 400; line-height: 28px;
+  color: var(--fg); padding: 22.4px 12px;
+  background: none; border: 0; cursor: pointer;
 }
-.nav-links a:hover { background: var(--faded); }
-@media (max-width: 1020px) { .nav-links { display: none; } }
+.nav-links > a:hover, .nav-trigger:hover { text-decoration: underline; text-underline-offset: 6px; }
+.nav-trigger svg { transition: transform 220ms ease; }
+.nav-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 7px; height: 34px; padding: 0 14px;
+  font-family: var(--font-sans); font-size: 16px; font-weight: 400; line-height: 1;
+  background: var(--slate-dark); color: var(--ivory-light); border-radius: var(--radius);
+  transition: background 200ms ease;
+}
+.nav-cta:hover { background: var(--slate-medium); }
+.nav-panel {
+  position: absolute; left: 0; right: 0; top: 68px;
+  background: var(--ivory-light); border-top: 1px solid var(--border);
+  box-shadow: 0 24px 48px rgba(20, 20, 19, 0.10);
+}
+.nav-panel[hidden] { display: none; }
+/* 保留 .shell 的水平内边距,只加纵向(否则分栏会顶到边距线外) */
+.nav-panel-in { display: flex; justify-content: flex-end; gap: 32px; padding-top: 36px; padding-bottom: 40px; }
+.nav-group { width: 202px; }
+.nav-group-head {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500;
+  color: var(--fg-3); line-height: 1.2; margin-bottom: 14px;
+}
+.nav-group a { display: block; font-family: var(--font-serif); font-size: 16px; line-height: 22.4px; padding: 2px 0; color: var(--fg); }
+.nav-group a:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 1020px) { .nav-links, .nav-panel { display: none; } }
 
 /* ---------- 首屏 ---------- */
 .hero { padding: 88px 0 0; }
@@ -218,17 +256,32 @@ img, svg { display: block; max-width: 100%; }
 .cta p { margin-top: 22px; font-size: 19px; color: var(--fg-2); max-width: 52ch; }
 .cta-act { display: flex; gap: 12px; margin-top: 34px; flex-wrap: wrap; }
 
-/* ---------- 深色页脚:多列,衬线链接 ---------- */
-.footer { background: var(--slate-dark); color: var(--ivory-light); padding: 140px 0 64px; }
-.foot-top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 32px; }
-@media (max-width: 1020px) { .foot-top { grid-template-columns: 1fr 1fr; } }
-.foot-top h4 { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--cloud-medium); margin-bottom: 18px; }
-.foot-top a { display: block; font-size: 16.5px; padding: 7px 0; color: rgba(250, 249, 245, 0.86); }
-.foot-top a:hover { color: var(--ivory-light); text-decoration: underline; text-underline-offset: 4px; }
-.foot-top .blurb { color: rgba(250, 249, 245, 0.62); font-size: 16px; line-height: 1.55; max-width: 34ch; }
-.foot-brand { font-family: var(--font-serif); font-size: 22px; font-weight: 600; margin-bottom: 14px; }
-.foot-base {
-  margin-top: 104px; padding-top: 22px; border-top: 1px solid rgba(250, 249, 245, 0.16);
-  display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;
-  font-family: var(--font-sans); font-size: 13px; color: rgba(250, 249, 245, 0.5);
+/* ---------- 深色页脚:anthropic 实测骨架 ----------
+ * 底 #141413 / 字 #faf9f5 · 上下内边距 76px
+ * 左栏 298px(品牌 + 说明 + © + 社交) + 四栏链接 215.27px、间隔 31.48px
+ * 栏标题 12px/500 象牙白不大写 · 链接 12px #b0aea5、行高 16.8、行距 29px
+ */
+.footer { background: var(--slate-dark); color: var(--ivory-light); padding: 76px 0; }
+.foot-top { display: grid; grid-template-columns: 298px repeat(4, minmax(0, 1fr)); gap: 31.48px; }
+@media (max-width: 1020px) { .foot-top { grid-template-columns: 1fr 1fr; row-gap: 48px; } }
+@media (max-width: 620px) { .foot-top { grid-template-columns: 1fr; } }
+.foot-brandcol { display: flex; flex-direction: column; }
+.foot-brand { font-family: var(--font-serif); font-size: 22px; font-weight: 400; letter-spacing: -0.01em; }
+.foot-top .blurb {
+  margin-top: 16px; font-family: var(--font-sans); font-size: 13px; line-height: 1.6;
+  color: rgba(250, 249, 245, 0.62); max-width: 30ch;
 }
+.foot-copy { margin-top: 16px; font-family: var(--font-sans); font-size: 12px; line-height: 1.55; color: var(--cloud-dark); }
+.foot-social { margin-top: auto; padding-top: 32px; display: flex; gap: 12px; }
+.foot-social a { display: grid; place-items: center; width: 24px; height: 24px; color: var(--cloud-medium); transition: color 180ms ease; }
+.foot-social a:hover { color: var(--ivory-light); }
+.foot-group + .foot-group { margin-top: 34px; }
+.foot-head {
+  font-family: var(--font-sans); font-size: 12px; font-weight: 500; line-height: 1.2;
+  color: var(--ivory-light); margin-bottom: 18px;
+}
+.foot-top a {
+  display: block; font-family: var(--font-sans); font-size: 12px; line-height: 16.8px;
+  padding: 6px 0; color: var(--cloud-medium); transition: color 160ms ease;
+}
+.foot-top a:hover { color: var(--ivory-light); text-decoration: underline; text-underline-offset: 3px; }
