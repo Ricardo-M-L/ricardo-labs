@@ -280,6 +280,8 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-sans); font-size: 12px; font-weight: 500; line-height: 1.2;
   color: var(--ivory-light); margin-bottom: 18px;
 }
+/* 栏内非链接小注(参照未使用,为消除 metis 许可歧义而加) */
+.foot-note { margin-top: 8px; font-family: var(--font-sans); font-size: 12px; line-height: 16.8px; color: var(--cloud-dark); }
 .foot-top a {
   display: block; font-family: var(--font-sans); font-size: 12px; line-height: 16.8px;
   padding: 6px 0; color: var(--cloud-medium); transition: color 160ms ease;

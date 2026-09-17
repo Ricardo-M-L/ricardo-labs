@@ -161,11 +161,18 @@ function Nav() {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
   const wrap = React.useRef(null)
+  const byHover = React.useRef(false)
+  const closeMenu = React.useCallback(() => { byHover.current = false; setOpen(false) }, [])
+  const hoverOpen = () => { byHover.current = true; setOpen(true) }
+  const clickToggle = () => {
+    if (byHover.current) { byHover.current = false; return }  // 悬停已开,点击不再关掉
+    setOpen((v) => !v)
+  }
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 120)
-    const onKey = (e) => { if (e.key === 'Escape') setOpen(false) }
-    const onDoc = (e) => { if (wrap.current && !wrap.current.contains(e.target)) setOpen(false) }
+    const onKey = (e) => { if (e.key === 'Escape') closeMenu() }
+    const onDoc = (e) => { if (wrap.current && !wrap.current.contains(e.target)) closeMenu() }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     document.addEventListener('keydown', onKey)
@@ -175,20 +182,13 @@ function Nav() {
       document.removeEventListener('keydown', onKey)
       document.removeEventListener('click', onDoc)
     }
-  }, [])
-
-  const byHover = React.useRef(false)
-  const hoverOpen = () => { byHover.current = true; setOpen(true) }
-  const clickToggle = () => {
-    if (byHover.current) { byHover.current = false; return }  // 悬停已开,点击不再关掉
-    setOpen((v) => !v)
-  }
+  }, [closeMenu])
 
   return (
     <header
       className={'nav' + (scrolled ? ' is-scrolled' : '')}
       ref={wrap}
-      onMouseLeave={() => { byHover.current = false; setOpen(false) }}
+      onMouseLeave={closeMenu}
     >
       <div className="shell nav-in">
         <a className="wordmark" href="#top">Ricardo Labs<em>.</em></a>
@@ -220,7 +220,7 @@ function Nav() {
               {items.map(([label, href]) => (
                 <a key={label} href={href}
                   {...(isExt(href) ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  onClick={() => setOpen(false)}>{label} ↗</a>
+                  onClick={closeMenu}>{label} ↗</a>
               ))}
             </div>
           ))}
@@ -404,7 +404,7 @@ const FOOT = [
       ['README', METIS + '#readme'],
       ['Issues', METIS + '/issues'],
       ['作者主页', GITHUB],
-    ]],
+    ], '许可:依仓库声明'],
   ],
   [
     ['站点', [
@@ -430,7 +430,7 @@ function Footer() {
         </div>
         {FOOT.map((groups) => (
           <div key={groups[0][0]}>
-            {groups.map(([head, items]) => (
+            {groups.map(([head, items, note]) => (
               <div className="foot-group" key={head}>
                 <h3 className="foot-head">{head}</h3>
                 {items.map(([label, href]) => (
@@ -438,6 +438,7 @@ function Footer() {
                     {label}{isExt(href) ? ' ↗' : ''}
                   </a>
                 ))}
+                {note && <p className="foot-note">{note}</p>}
               </div>
             ))}
           </div>
