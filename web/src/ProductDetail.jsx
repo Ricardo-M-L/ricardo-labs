@@ -55,10 +55,10 @@ const DETAILS = [
     points: [
       ['边生成边执行', '流式 agent loop:模型输出、工具调用与结果在同一条流里推进,不用等整段回复落地。'],
       ['工具与模型都可换', '16 个内置工具开箱可用,不用自己拼工具层;provider 只换一行配置,循环本身不动。'],
-      ['记忆分三层', '工作 / 情景 / 语义分开存:当轮上下文、发生过什么、以及沉淀下来的规律,不混在一个池子里。'],
+      ['记忆分三层(Core / Archival / Recall)', 'Core 区块放常驻约束,Archival 以 JSONL 归档发生过的事,Recall 按需检索历史:三者不混在一个池子里。'],
     ],
-    code: ['loop:    stream → tool call → observe', 'tools:   16 个内置', 'memory:  working / episodic / semantic', 'latest:  v0.4.59'],
-    links: [['仓库', 'https://github.com/Ricardo-M-L/metis'], ['发布记录', 'https://github.com/Ricardo-M-L/metis/releases/latest'], ['Issues', 'https://github.com/Ricardo-M-L/metis/issues']],
+    code: ['loop:    stream → tool call → observe', 'tools:   16 个内置', 'memory:  core / archival / recall', 'latest:  v0.4.59'],
+    links: [['Try metis(桌面端)', import.meta.env.BASE_URL + 'try-metis.html'], ['仓库', 'https://github.com/Ricardo-M-L/metis'], ['发布记录', 'https://github.com/Ricardo-M-L/metis/releases/latest'], ['Issues', 'https://github.com/Ricardo-M-L/metis/issues']],
     note: '许可:依仓库声明(不是 MIT)',
   },
 ]
@@ -84,15 +84,26 @@ export default function ProductDetails() {
             <pre className="ds-code"><code>{d.code.join('\n')}</code></pre>
             <div className="ds-foot">
               <div className="ds-links">
-                {d.links.map(([l, h]) => (
-                  <a key={l} href={h} target="_blank" rel="noreferrer">
-                    {l}
-                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                      <path d="M3 9L9 3M9 3H4.5M9 3v4.5" stroke="currentColor" strokeWidth="1.3"
-                        strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </a>
-                ))}
+                {d.links.map(([l, h]) => {
+                  // 站内页(不是 http 开头)不加新窗口,用「→」而不是外链箭头
+                  const ext = h.startsWith('http')
+                  return (
+                    <a key={l} href={h} {...(ext ? { target: '_blank', rel: 'noreferrer' } : {})}>
+                      {l}
+                      {ext ? (
+                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                          <path d="M3 9L9 3M9 3H4.5M9 3v4.5" stroke="currentColor" strokeWidth="1.3"
+                            strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      ) : (
+                        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path d="M3.2 8h9.6M8.6 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6"
+                            strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </a>
+                  )
+                })}
               </div>
               {d.note && <p className="ds-note">{d.note}</p>}
             </div>

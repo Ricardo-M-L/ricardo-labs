@@ -4,6 +4,8 @@ import ProductDetails from './ProductDetail'
 
 const GITHUB = 'https://github.com/Ricardo-M-L'
 const METIS = 'https://github.com/Ricardo-M-L/metis'
+// 「Try metis」独立页(GitHub Pages 是静态托管,用真实 HTML 入口而不是前端路由)
+const TRY = import.meta.env.BASE_URL + 'try-metis.html'
 
 /* ---------- 小图标 ---------- */
 const Arrow = () => (
@@ -99,9 +101,9 @@ const ArtLoop = () => (
       <text x="106" y="32">stream</text>
       <text x="106" y="70">tool call ×16</text>
       <text x="106" y="108">observe</text>
-      <text x="247" y="34">working</text>
-      <text x="247" y="64">episodic</text>
-      <text x="247" y="94">semantic</text>
+      <text x="247" y="34">core</text>
+      <text x="247" y="64">archival</text>
+      <text x="247" y="94">recall</text>
     </g>
     <g>
       <circle cx="210" cy="66" r="3.5" fill="#c6613f" />
@@ -134,9 +136,9 @@ const PRODUCTS = [
   },
   {
     id: 'metis', tone: 't-cactus', label: '04 · Go · CLI',
-    title: 'metis', desc: '本地优先的 Agent CLI:流式 agent loop、16 个内置工具、多 provider LLM,记忆分工作/情景/语义三层,终端里跑,也能当 ACP server 被别的客户端调用。',
+    title: 'metis', desc: '本地优先的 Agent CLI:流式 agent loop、16 个内置工具、多 provider LLM,记忆分 core / archival / recall 三层,终端里跑,也能当 ACP server 被别的客户端调用;另有一个原生桌面端。',
     art: <ArtLoop />,
-    links: [['了解详情', '#p-metis'], ['仓库', METIS], ['发布记录', METIS + '/releases/latest']],
+    links: [['了解详情', '#p-metis'], ['Try metis', TRY], ['仓库', METIS], ['发布记录', METIS + '/releases/latest']],
   },
 ]
 
@@ -173,6 +175,7 @@ const MENU = [
     ['crates.io · cordis-di-core', 'https://crates.io/crates/cordis-di-core'],
   ]],
   ['metis', [
+    ['Try metis(桌面端 + CLI)', TRY],
     ['最新版本 v0.4.59', METIS + '/releases/latest'],
     ['README', METIS + '#readme'],
     ['Issues', METIS + '/issues'],
@@ -192,9 +195,9 @@ const GithubMark = () => (
   </svg>
 )
 
-const isExt = (href) => !href.startsWith('#')
+const isExt = (href) => !(href.startsWith('#') || href === TRY)
 
-function Nav() {
+export function Nav() {
   const [open, setOpen] = React.useState(false)
   const [scrolled, setScrolled] = React.useState(false)
   const wrap = React.useRef(null)
@@ -244,6 +247,9 @@ function Nav() {
             <a href="#notes">笔记</a>
             <a href="#claim">关于</a>
           </nav>
+          <a className="nav-cta ghost" href={TRY}>
+            Try metis <Arrow />
+          </a>
           <a className="nav-cta" href={GITHUB} target="_blank" rel="noreferrer">
             GitHub <Ext />
           </a>
@@ -257,7 +263,7 @@ function Nav() {
               {items.map(([label, href]) => (
                 <a key={label} href={href}
                   {...(isExt(href) ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  onClick={closeMenu}>{label} ↗</a>
+                  onClick={closeMenu}>{label}{isExt(href) ? " ↗" : ""}</a>
               ))}
             </div>
           ))}
@@ -457,7 +463,7 @@ const FOOT = [
   ],
 ]
 
-function Footer() {
+export function Footer() {
   return (
     <footer className="footer">
       <div className="shell foot-top">

@@ -1,0 +1,161 @@
+/* 「Try metis」独立页 —— 沿用站点的象牙白/衬线骨架,不引入新风格 */
+.tm-hero { padding: clamp(64px, 9vw, 120px) 0 clamp(36px, 5vw, 64px); }
+.tm-eyebrow {
+  font-family: var(--font-sans); font-size: 12px; line-height: 16.8px;
+  letter-spacing: .04em; color: var(--cloud-dark);
+}
+.tm-hero h1 {
+  margin-top: 14px; font-family: var(--font-serif); font-weight: 400;
+  font-size: clamp(38px, 6vw, 68px); line-height: 1.06; letter-spacing: -.02em;
+}
+.tm-lead {
+  margin-top: 20px; max-width: 68ch; font-family: var(--font-serif);
+  font-size: 20px; line-height: 1.5; color: var(--slate-light);
+}
+.tm-act { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.tm-note {
+  margin-top: 16px; font-family: var(--font-sans); font-size: 12px;
+  line-height: 16.8px; color: var(--cloud-dark);
+}
+.tm-note a { display: inline-flex; align-items: center; gap: 4px; color: var(--accent); }
+
+/* hero 截图 */
+.tm-shotband { padding-bottom: clamp(48px, 6vw, 84px); }
+.tm-shot-frame {
+  margin: 0; border: 1px solid var(--ivory-dark); border-radius: var(--radius-card);
+  overflow: hidden; background: var(--ivory-medium);
+}
+.tm-shot-frame img { display: block; width: 100%; height: auto; }
+.tm-shot-frame figcaption {
+  padding: 12px 16px; font-family: var(--font-sans); font-size: 12px;
+  color: var(--cloud-dark); border-top: 1px solid var(--ivory-dark);
+}
+
+/* 区块通用 */
+.tm-uses, .tm-abil, .tm-gallery, .tm-install, .tm-faq, .tm-cta {
+  padding: clamp(56px, 7vw, 96px) 0; border-top: 1px solid var(--ivory-dark);
+}
+.tm-abil.is-tint, .tm-install.is-tint { background: var(--ivory-medium); }
+.tm-uses h2, .tm-abil h2, .tm-gallery h2, .tm-install h2, .tm-faq h2, .tm-cta h2 {
+  font-family: var(--font-serif); font-weight: 400;
+  font-size: clamp(28px, 3.6vw, 40px); line-height: 1.15; letter-spacing: -.01em;
+}
+.tm-section-lead {
+  margin-top: 12px; max-width: 60ch; font-family: var(--font-serif);
+  font-size: 18px; line-height: 1.5; color: var(--slate-light);
+}
+
+/* 两种用法 */
+.tm-use-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px; margin-top: 32px;
+}
+.tm-use {
+  padding: 26px 26px 24px; background: var(--ivory-medium);
+  border: 1px solid var(--ivory-dark); border-radius: var(--radius-card);
+}
+.tm-tag {
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .02em;
+  color: var(--cloud-dark); text-transform: none;
+}
+.tm-use h3 {
+  margin-top: 10px; font-family: var(--font-serif); font-weight: 400;
+  font-size: 26px; line-height: 1.2;
+}
+.tm-use-lead {
+  margin-top: 10px; font-family: var(--font-serif); font-size: 17px;
+  line-height: 1.5; color: var(--slate-light);
+}
+.tm-use dl { margin-top: 20px; border-top: 1px solid var(--ivory-dark); }
+.tm-use dt {
+  margin-top: 16px; font-family: var(--font-sans); font-size: 15px;
+  font-weight: 500; color: var(--slate-dark);
+}
+.tm-use dd {
+  margin-top: 6px; font-family: var(--font-serif); font-size: 16px;
+  line-height: 1.5; color: var(--slate-light);
+}
+
+/* 能力网格 */
+.tm-abil-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px; margin-top: 32px; background: var(--ivory-dark);
+  border: 1px solid var(--ivory-dark); border-radius: var(--radius-card); overflow: hidden;
+}
+.tm-abil-cell { padding: 24px 22px; background: var(--ivory-medium); }
+.tm-abil-cell h3 {
+  font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: var(--slate-dark);
+}
+.tm-abil-cell p {
+  margin-top: 8px; font-family: var(--font-serif); font-size: 16px;
+  line-height: 1.5; color: var(--slate-light);
+}
+
+/* 截图画廊 */
+.tm-shots {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px; margin-top: 32px;
+}
+.tm-shots figure {
+  margin: 0; border: 1px solid var(--ivory-dark); border-radius: var(--radius-card);
+  overflow: hidden; background: var(--ivory-medium);
+}
+.tm-shots img { display: block; width: 100%; height: auto; }
+.tm-shots figcaption {
+  display: flex; flex-direction: column; gap: 4px; padding: 14px 16px;
+  border-top: 1px solid var(--ivory-dark);
+}
+.tm-shots b { font-family: var(--font-sans); font-size: 14px; font-weight: 500; color: var(--slate-dark); }
+.tm-shots span { font-family: var(--font-serif); font-size: 15px; line-height: 1.5; color: var(--slate-light); }
+
+/* 安装 */
+.tm-install-grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px; margin-top: 32px;
+}
+/* 网格子项默认 min-width:auto,一行长命令会把整页撑出横向滚动 */
+.tm-install-grid > * { min-width: 0; }
+.tm-step {
+  font-family: var(--font-sans); font-size: 12px; letter-spacing: .04em;
+  color: var(--cloud-dark);
+}
+.tm-code {
+  margin-top: 12px; padding: 16px 18px; overflow-x: auto; max-width: 100%;
+  background: var(--ivory-light); border-left: 2px solid var(--clay);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7; color: var(--slate-dark);
+}
+.tm-plat { margin-top: 12px; }
+.tm-plat li {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--ivory-dark);
+}
+.tm-plat b { font-family: var(--font-sans); font-size: 14px; font-weight: 500; min-width: 84px; }
+.tm-plat code {
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--slate-light);
+  overflow-wrap: anywhere;
+}
+
+/* FAQ */
+.tm-qa {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 32px; margin-top: 30px;
+}
+.tm-qa h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: var(--slate-dark); }
+.tm-qa p { margin-top: 8px; font-family: var(--font-serif); font-size: 16px; line-height: 1.5; color: var(--slate-light); }
+
+/* 收尾 */
+.tm-cta { text-align: left; }
+.tm-cta p {
+  margin-top: 14px; max-width: 58ch; font-family: var(--font-serif);
+  font-size: 18px; line-height: 1.5; color: var(--slate-light);
+}
+
+@media (max-width: 1020px) {
+  .tm-use-grid, .tm-install-grid { grid-template-columns: 1fr; }
+  .tm-abil-grid, .tm-qa { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 700px) {
+  .tm-abil-grid, .tm-qa, .tm-shots { grid-template-columns: 1fr; }
+  .tm-hero h1 br { display: none; }
+}

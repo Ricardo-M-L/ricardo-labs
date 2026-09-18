@@ -86,6 +86,9 @@ img, svg { display: block; max-width: 100%; }
   transition: background 200ms ease;
 }
 .nav-cta:hover { background: var(--slate-medium); }
+/* 「Try metis」入口:描边药丸,和 GitHub 实心药丸并排但主次分明 */
+.nav-cta.ghost { background: transparent; color: var(--slate-dark); box-shadow: inset 0 0 0 1px rgba(20,20,19,.22); }
+.nav-cta.ghost:hover { background: rgba(20,20,19,.06); box-shadow: inset 0 0 0 1px rgba(20,20,19,.34); }
 .nav-panel {
   position: absolute; left: 0; right: 0; top: 68px;
   background: var(--ivory-light); border-top: 1px solid var(--border);
