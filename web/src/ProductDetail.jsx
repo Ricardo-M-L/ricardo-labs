@@ -58,7 +58,7 @@ const DETAILS = [
       ['记忆分三层(Core / Archival / Recall)', 'Core 区块放常驻约束,Archival 以 JSONL 归档发生过的事,Recall 按需检索历史:三者不混在一个池子里。'],
     ],
     code: ['loop:    stream → tool call → observe', 'tools:   16 个内置', 'memory:  core / archival / recall', 'latest:  v0.4.59'],
-    links: [['Try metis(桌面端)', import.meta.env.BASE_URL + 'try-metis.html'], ['仓库', 'https://github.com/Ricardo-M-L/metis'], ['发布记录', 'https://github.com/Ricardo-M-L/metis/releases/latest'], ['Issues', 'https://github.com/Ricardo-M-L/metis/issues']],
+    links: [['Try metis(桌面端)', import.meta.env.BASE_URL + 'try-metis/'], ['仓库', 'https://github.com/Ricardo-M-L/metis'], ['发布记录', 'https://github.com/Ricardo-M-L/metis/releases/latest'], ['Issues', 'https://github.com/Ricardo-M-L/metis/issues']],
     note: '许可:依仓库声明(不是 MIT)',
   },
 ]

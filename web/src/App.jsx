@@ -5,7 +5,9 @@ import ProductDetails from './ProductDetail'
 const GITHUB = 'https://github.com/Ricardo-M-L'
 const METIS = 'https://github.com/Ricardo-M-L/metis'
 // 「Try metis」独立页(GitHub Pages 是静态托管,用真实 HTML 入口而不是前端路由)
-const TRY = import.meta.env.BASE_URL + 'try-metis.html'
+const HOME = import.meta.env.BASE_URL
+const HOME_P = import.meta.env.BASE_URL
+const TRY = import.meta.env.BASE_URL + 'try-metis/'
 
 /* ---------- 小图标 ---------- */
 const Arrow = () => (
@@ -163,10 +165,10 @@ const NOTES = [
 /* 顶栏下拉大菜单:分栏 = 产品 / 源码 / metis(实测参照:链接 16px 衬线,分栏右对齐) */
 const MENU = [
   ['产品', [
-    ['cordis-di', '#p-cordis-di'],
-    ['agent-memory', '#p-agent-memory'],
-    ['Ifscape', '#p-ifscape'],
-    ['metis', '#p-metis'],
+    ['cordis-di', HOME_P + '#p-cordis-di'],
+    ['agent-memory', HOME_P + '#p-agent-memory'],
+    ['Ifscape', HOME_P + '#p-ifscape'],
+    ['metis', HOME_P + '#p-metis'],
   ]],
   ['源码', [
     ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
@@ -231,7 +233,7 @@ export function Nav() {
       onMouseLeave={closeMenu}
     >
       <div className="shell nav-in">
-        <a className="wordmark" href="#top">Ricardo Labs<em>.</em></a>
+        <a className="wordmark" href={HOME + '#top'}>Ricardo Labs<em>.</em></a>
         <div className="nav-right">
           <nav className="nav-links" aria-label="主导航">
             <button
@@ -244,8 +246,8 @@ export function Nav() {
             >
               产品 <Caret />
             </button>
-            <a href="#notes">笔记</a>
-            <a href="#claim">关于</a>
+            <a href={HOME + '#notes'}>笔记</a>
+            <a href={HOME + '#claim'}>关于</a>
           </nav>
           <a className="nav-cta ghost" href={TRY}>
             Try metis <Arrow />

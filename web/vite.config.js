@@ -14,7 +14,8 @@ export default defineConfig({
       // 不依赖前端路由（GitHub Pages 无法做服务端 rewrite）。
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
-        tryMetis: fileURLToPath(new URL('./try-metis.html', import.meta.url)),
+        // 目录式入口:线上就是 /try-metis/(网址不带 .html)
+        tryMetis: fileURLToPath(new URL('./try-metis/index.html', import.meta.url)),
       },
     },
   },
