@@ -134,8 +134,8 @@ img, svg { display: block; max-width: 100%; }
 }
 .stage-copy { position: relative; z-index: 2; }
 .stage-copy h2 { font-family: var(--font-serif); font-weight: 400; font-size: 36px; line-height: 1.14; letter-spacing: -0.015em; }
-.stage-copy p { margin-top: 18px; color: rgba(250, 249, 245, 0.74); font-size: 18px; line-height: 1.55; max-width: 46ch; }
-.stage-copy .detail { color: rgba(250, 249, 245, 0.6); }
+.stage-copy p { margin-top: 18px; color: rgba(250, 249, 245, 0.87); font-size: 18px; line-height: 1.55; max-width: 46ch; }
+.stage-copy .detail { color: rgba(250, 249, 245, 0.84); }
 .stage-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px; }
 .badge {
   font-family: var(--font-mono); font-size: 12px; padding: 6px 11px;
