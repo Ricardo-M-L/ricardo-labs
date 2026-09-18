@@ -1,6 +1,9 @@
 import React from 'react'
+import HeroField from './HeroField'
+import ProductDetails from './ProductDetail'
 
 const GITHUB = 'https://github.com/Ricardo-M-L'
+const METIS = 'https://github.com/Ricardo-M-L/metis'
 
 /* ---------- 小图标 ---------- */
 const Arrow = () => (
@@ -79,6 +82,35 @@ const ArtFutures = () => (
   </svg>
 )
 
+const ArtLoop = () => (
+  <svg viewBox="0 0 320 132" role="img" aria-label="Agent 流式循环与分层记忆">
+    <g fill="none" stroke="rgba(20,20,19,.5)" strokeWidth="1.2">
+      <rect x="8" y="48" width="58" height="36" rx="4" />
+      <rect x="96" y="12" width="126" height="108" rx="6" />
+      <path d="M66 66h30M222 66h18" />
+      <path d="M198 100c0 14-16 14-16 14h-58c-14 0-14-14-14-14" />
+      <path d="M240 24h72M240 54h72M240 84h72" />
+      <rect x="240" y="18" width="72" height="24" rx="4" />
+      <rect x="240" y="48" width="72" height="24" rx="4" />
+      <rect x="240" y="78" width="72" height="24" rx="4" />
+    </g>
+    <g fontSize="10.5" fontFamily="JetBrains Mono, monospace" fill="rgba(20,20,19,.8)">
+      <text x="15" y="70">prompt</text>
+      <text x="106" y="32">stream</text>
+      <text x="106" y="70">tool call ×16</text>
+      <text x="106" y="108">observe</text>
+      <text x="247" y="34">working</text>
+      <text x="247" y="64">episodic</text>
+      <text x="247" y="94">semantic</text>
+    </g>
+    <g>
+      <circle cx="210" cy="66" r="3.5" fill="#c6613f" />
+      <path d="M210 62v-16" stroke="#c6613f" strokeWidth="1.4" fill="none" strokeLinecap="round" />
+      <path d="M207 52l3-6 3 6" stroke="#c6613f" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+  </svg>
+)
+
 /* ---------- 内容(全部为项目事实) ---------- */
 const NL = '\n'
 const PRODUCTS = [
@@ -86,19 +118,25 @@ const PRODUCTS = [
     id: 'cordis-di', tone: 't-oat', label: '01 · Rust · crates.io',
     title: 'cordis-di', desc: '类型化插件与依赖注入。Fiber 生命周期把"什么时候清理"变成确定性契约,staged reload 失败会先回滚新作用域、保住旧运行时。',
     art: <ArtScopes />,
-    links: [['仓库', 'https://github.com/Ricardo-M-L/cordis-di'], ['crate', 'https://crates.io/crates/cordis-di-core']],
+    links: [['了解详情', '#p-cordis-di'], ['仓库', 'https://github.com/Ricardo-M-L/cordis-di'], ['crate', 'https://crates.io/crates/cordis-di-core']],
   },
   {
     id: 'agent-memory', tone: 't-manilla', label: '02 · Rust · SQLite',
     title: 'agent-memory', desc: '不搭数据库服务就能存事实:混合检索（BM25 + 向量）加权时效与重要性,supersede 显式演化记忆,历史全程可审计。',
     art: <ArtRetrieval />,
-    links: [['仓库', 'https://github.com/Ricardo-M-L/agent-memory']],
+    links: [['了解详情', '#p-agent-memory'], ['仓库', 'https://github.com/Ricardo-M-L/agent-memory']],
   },
   {
     id: 'ifscape', tone: 't-kraft', label: '03 · TypeScript + Rust · 本地预览',
     title: 'Ifscape', desc: '后果工作室:每次规划只给 2–4 个有界的候选未来,推演结果一律标注 model-prediction,提交门只对人打开。',
     art: <ArtFutures />,
-    links: [['作者主页', GITHUB]],
+    links: [['了解详情', '#p-ifscape'], ['作者主页', GITHUB]],
+  },
+  {
+    id: 'metis', tone: 't-cactus', label: '04 · Go · CLI',
+    title: 'metis', desc: '本地优先的 Agent CLI:流式 agent loop、16 个内置工具、多 provider LLM,记忆分工作/情景/语义三层,终端里跑,也能当 ACP server 被别的客户端调用。',
+    art: <ArtLoop />,
+    links: [['了解详情', '#p-metis'], ['仓库', METIS], ['发布记录', METIS + '/releases/latest']],
   },
 ]
 
@@ -119,15 +157,14 @@ const NOTES = [
 ]
 
 /* ---------- 组件 ---------- */
-const METIS = 'https://github.com/Ricardo-M-L/metis'
 
 /* 顶栏下拉大菜单:分栏 = 产品 / 源码 / metis(实测参照:链接 16px 衬线,分栏右对齐) */
 const MENU = [
   ['产品', [
-    ['cordis-di', '#cordis-di'],
-    ['agent-memory', '#agent-memory'],
-    ['Ifscape', '#ifscape'],
-    ['metis', METIS],
+    ['cordis-di', '#p-cordis-di'],
+    ['agent-memory', '#p-agent-memory'],
+    ['Ifscape', '#p-ifscape'],
+    ['metis', '#p-metis'],
   ]],
   ['源码', [
     ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
@@ -236,16 +273,16 @@ function Hero() {
       <div className="shell">
         <h1>为 Agent 造地基:<i>装得稳</i>、<i>记得住</i>、看得见后果。</h1>
         <p className="sub">
-          三个开源项目,三条工程主张——确定性生命周期、可审计的持久记忆、把推演变成可提交的分支。均以源码开放。
+          四个开源项目,四条工程主张——确定性生命周期、可审计的持久记忆、把推演变成可提交的分支,以及一个本地优先的 Agent CLI。均以源码开放。
         </p>
         <div className="hero-act">
-          <a className="btn btn-primary" href="#products">浏览三个产品 <Arrow /></a>
+          <a className="btn btn-primary" href="#products">浏览四个产品 <Arrow /></a>
           <a className="btn btn-secondary" href="https://crates.io/crates/cordis-di-core" target="_blank" rel="noreferrer">
             <span className="mono" style={{ fontSize: 14 }}>cargo add cordis-di-core</span>
           </a>
         </div>
         <div className="hero-meta">
-          <span>MIT 许可</span>
+          <span>MIT 许可(metis 依仓库声明)</span>
           <span>9 个 crate</span>
           <span>77 个上游合并 PR</span>
           <span>维护者 Ricardo-M-L</span>
@@ -260,6 +297,7 @@ function Stage() {
     <section className="shell stage" aria-label="cordis-di 生命周期">
       <div className="stage-card">
         <div className="stage-glow" />
+        <HeroField />
         <div className="stage-scrim" />
         <div className="stage-grain" />
         <div className="stage-copy">
@@ -295,10 +333,10 @@ function Products() {
   return (
     <section className="shell releases" id="products">
       <div className="sec-head">
-        <h2>三个项目</h2>
+        <h2>四个项目</h2>
         <a className="detail" href={GITHUB} target="_blank" rel="noreferrer">全部仓库 ↗</a>
       </div>
-      <div className="cards-3">
+      <div className="cards-4">
         {PRODUCTS.map(p => (
           <article key={p.id} id={p.id} className={'rcard ' + p.tone}>
             <p className="detail">{p.label}</p>
@@ -307,7 +345,10 @@ function Products() {
             <div className="art">{p.art}</div>
             <div className="foot">
               {p.links.map(([l, h]) => (
-                <a key={l} href={h} target="_blank" rel="noreferrer">{l} <Arrow /></a>
+                <a key={l} href={h}
+                  {...(isExt(h) ? { target: '_blank', rel: 'noreferrer' } : {})}>
+                  {l} {isExt(h) ? <Ext /> : <Arrow />}
+                </a>
               ))}
             </div>
           </article>
@@ -331,8 +372,8 @@ function Claim() {
         <div className="stats">
           <div className="stat"><b>77</b><span>已合并的上游 PR(agent 工具链生态)</span></div>
           <div className="stat"><b>9</b><span>cordis-di 独立 crate,已发布 crates.io</span></div>
-          <div className="stat"><b>3</b><span>开源产品:框架 / 记忆 / 后果工作室</span></div>
-          <div className="stat"><b>MIT</b><span>许可,无商业限制</span></div>
+          <div className="stat"><b>4</b><span>开源产品:框架 / 记忆 / 后果工作室 / Agent CLI</span></div>
+          <div className="stat"><b>MIT</b><span>许可,无商业限制(metis 依仓库声明)</span></div>
         </div>
       </div>
     </section>
@@ -365,7 +406,7 @@ function Cta() {
   return (
     <section className="shell cta">
       <h2>先读源码,再决定要不要用。</h2>
-      <p>三个项目都在公开仓库里,提交历史、测试与发布流程可查。欢迎在 issue 里直接挑战设计。</p>
+      <p>四个项目都在公开仓库里,提交历史、测试与发布流程可查。欢迎在 issue 里直接挑战设计。</p>
       <div className="cta-act">
         <a className="btn btn-primary" href={GITHUB} target="_blank" rel="noreferrer">打开 GitHub <Ext /></a>
         <a className="btn btn-secondary" href="https://docs.rs/cordis-di-core" target="_blank" rel="noreferrer">读文档</a>
@@ -423,7 +464,7 @@ function Footer() {
         <div className="foot-brandcol">
           <p className="foot-brand">Ricardo Labs</p>
           <p className="blurb">为 Agent 工程造地基:确定性生命周期、可审计记忆、可提交的推演,以及一个本地优先的 Agent CLI。</p>
-          <p className="foot-copy">© 2026 Ricardo Labs · cordis-di / agent-memory / Ifscape 为 MIT 许可</p>
+          <p className="foot-copy">© 2026 Ricardo Labs · cordis-di / agent-memory / Ifscape 为 MIT 许可,metis 依仓库声明</p>
           <div className="foot-social">
             <a href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubMark /></a>
           </div>
@@ -473,6 +514,7 @@ export default function App() {
       <Hero />
       <Stage />
       <Products />
+      <ProductDetails />
       <Claim />
       <Notes />
       <Cta />

@@ -186,8 +186,9 @@ img, svg { display: block; max-width: 100%; }
 .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 28px; }
 .sec-head h2 { font-family: var(--font-serif); font-weight: 400; font-size: 28px; letter-spacing: -0.015em; }
 .sec-head a:hover { text-decoration: underline; text-underline-offset: 4px; }
-.cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
-@media (max-width: 1020px) { .cards-3 { grid-template-columns: 1fr; } }
+.cards-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1180px) { .cards-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 700px) { .cards-4 { grid-template-columns: 1fr; } }
 .rcard {
   border-radius: var(--radius-lg); overflow: hidden; background: var(--oat);
   padding: 32px; min-height: 540px; display: flex; flex-direction: column;
