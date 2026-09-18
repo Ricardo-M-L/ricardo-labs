@@ -74,7 +74,6 @@ const FAQ = [
 ]
 
 export default function TryMetis() {
-  const [myOS, setMyOS] = React.useState('')
   const [copied, setCopied] = React.useState(false)
   const copyCmd = () => {
     const done = () => { setCopied(true); setTimeout(() => setCopied(false), 1800) }
@@ -82,10 +81,6 @@ export default function TryMetis() {
       navigator.clipboard.writeText(CURL).then(done).catch(done)
     } else { done() }
   }
-  React.useEffect(() => {
-    const ua = navigator.userAgent
-    setMyOS(/Mac OS X|Macintosh/i.test(ua) ? 'macOS' : /Windows/i.test(ua) ? 'Windows' : /Linux|X11/i.test(ua) ? 'Linux' : '')
-  }, [])
   return (
     <>
       <Nav />
@@ -101,7 +96,7 @@ export default function TryMetis() {
             <div className="tm-dl">
               {DESKTOP.map(([os, file, meta]) => (
                 <a className="tm-dl-btn" key={os} href={DL(file)} download>
-                  <span className="tm-dl-os">{os}{os === myOS && <em>你的系统</em>}</span>
+                  <span className="tm-dl-os">{os}</span>
                   <span className="tm-dl-meta">{meta}</span>
                 </a>
               ))}
@@ -187,10 +182,11 @@ export default function TryMetis() {
             <div className="tm-install-grid">
               <div>
                 <p className="tm-step">第一步 · CLI</p>
-                <div className="tm-cmdwrap">
-                  <pre className="tm-code"><code>{CURL}</code></pre>
-                  <button type="button" className="tm-copy tm-copy-in" onClick={copyCmd}>{copied ? '已复制' : '复制'}</button>
+                <div className="tm-cmdhead">
+                  <span className="tm-cli-label">在终端里执行</span>
+                  <button type="button" className="tm-copy" onClick={copyCmd}>{copied ? '已复制' : '复制'}</button>
                 </div>
+                <pre className="tm-code"><code>{CURL}</code></pre>
                 <p className="tm-note">macOS / Linux 均可用,装完执行 metis version 确认。</p>
               </div>
               <div>
