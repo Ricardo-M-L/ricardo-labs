@@ -83,8 +83,8 @@ export default function HeroField() {
         const y = (cy + c * dy) * h
         const rad = Math.max(1, r * Math.min(w, h) * (1 + 0.06 * Math.sin(time * sp * 1.3 + ph)))
         const g = ctx.createRadialGradient(x, y, 0, x, y, rad)
-        g.addColorStop(0, `rgba(${rgb},.64)`)
-        g.addColorStop(0.45, `rgba(${rgb},.27)`)
+        g.addColorStop(0, `rgba(${rgb},.56)`)
+        g.addColorStop(0.45, `rgba(${rgb},.24)`)
         g.addColorStop(1, `rgba(${rgb},0)`)
         ctx.fillStyle = g
         ctx.beginPath()
