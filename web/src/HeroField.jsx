@@ -18,10 +18,10 @@ const BLOBS = [
   [0.08, 0.12, 0.30, '132,148,126', 1.2, 0.060, 0.060, 0.071],
 ]
 
-// [angle, y%, 带宽%, alpha, speed, tint] —— 斜向扫过的光带
+// [angle, y%, 带宽%, alpha, 摆动速度, tint, 三角波周期秒] —— 末项 >0 时用匀速三角波往复(速度恒定),0 则用摆动
 const BANDS = [
-  [-0.38, 0.60, 0.44, 0.17, 0.048, '226,190,120'],
-  [-0.22, 0.16, 0.30, 0.13, 0.031, '196,120,84'],
+  [-0.38, 0.60, 0.44, 0.17, 0, '226,190,120', 90],
+  [-0.22, 0.16, 0.30, 0.13, 0.031, '196,120,84', 0],
 ]
 
 export default function HeroField() {
@@ -56,11 +56,14 @@ export default function HeroField() {
       const R = Math.hypot(w, h)
 
       // 斜向光带:沿自身方向缓慢平移,是这套动效里最容易被看见的部分
-      for (const [ang, y0, wid, alpha, sp, tint] of BANDS) {
+      for (const [ang, y0, wid, alpha, sp, tint, P] of BANDS) {
         ctx.save()
         ctx.translate(w / 2, h / 2)
         ctx.rotate(ang)
-        const cx = Math.sin(time * sp) * 0.34 * R
+        // 三角波 = 匀速往复,只有折返瞬间换向;正弦在两端速度趋零,那半秒会看着像静止
+        const cx = P
+          ? (2 * Math.abs(((time / P) % 1) - 0.5) - 1) * 0.7 * R
+          : (Math.sin(time * sp) + 0.5 * Math.sin(time * sp * 1.618 + 1.1)) * 0.34 * R
         const g = ctx.createLinearGradient(cx - R, 0, cx + R, 0)
         g.addColorStop(0, `rgba(${tint},0)`)
         g.addColorStop(0.5, `rgba(${tint},${alpha})`)
@@ -73,8 +76,11 @@ export default function HeroField() {
       }
 
       for (const [cx, cy, r, rgb, ph, dx, dy, sp] of BLOBS) {
-        const x = (cx + Math.sin(time * sp + ph) * dx) * w
-        const y = (cy + Math.cos(time * sp * 0.8 + ph) * dy) * h
+        // 双谐波叠加:单正弦在转向点速度趋零,会让整幅画面短暂看着像静止
+        const s = Math.sin(time * sp + ph) + 0.45 * Math.sin(time * sp * 1.7 + ph * 2.3)
+        const c = Math.cos(time * sp * 0.8 + ph) + 0.45 * Math.cos(time * sp * 1.31 + ph * 1.6)
+        const x = (cx + s * dx) * w
+        const y = (cy + c * dy) * h
         const rad = Math.max(1, r * Math.min(w, h) * (1 + 0.06 * Math.sin(time * sp * 1.3 + ph)))
         const g = ctx.createRadialGradient(x, y, 0, x, y, rad)
         g.addColorStop(0, `rgba(${rgb},.50)`)

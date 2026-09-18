@@ -31,6 +31,7 @@ const USES = [
   {
     tag: '02 · Desktop · Wails',
     title: 'metis desktop',
+    icon: 'appicon.png',
     lead: '原生客户端:Go 负责后端,WebView 负责界面——外壳下面就是同一个 metis。',
     items: [
       ['先装 CLI', '桌面端把会话、设置与 CLI 执行委托给本地 metis,它不是独立的推理运行时;装桌面端之前先把 CLI 装好。'],
@@ -50,10 +51,10 @@ const ABILITIES = [
 ]
 
 const SHOTS = [
-  ['welcome.png', '欢迎页', '选模型与 effort,直接描述要构建的东西;上下文占用就摆在标题栏上。'],
-  ['palette.png', '命令面板', '输入 / 唤起,全流程键盘走完,不用记参数。'],
-  ['executed.png', '命令执行', '命令在会话里跑完,结果留在上下文中,后面的对话可以直接引用。'],
-  ['marketplace.png', '插件市场', '浏览、安装插件,按需扩展工具面。'],
+  ['welcome.jpg', '欢迎页', '选模型与 effort,直接描述要构建的东西;上下文占用就摆在标题栏上。'],
+  ['palette.jpg', '命令面板', '输入 / 唤起,全流程键盘走完,不用记参数。'],
+  ['executed.jpg', '命令执行', '命令在会话里跑完,结果留在上下文中,后面的对话可以直接引用。'],
+  ['marketplace.jpg', '插件市场', '浏览、安装插件,按需扩展工具面。'],
 ]
 
 const PLATFORMS = [
@@ -92,7 +93,7 @@ export default function TryMetis() {
         <section className="tm-shotband">
           <div className="shell">
             <figure className="tm-shot-frame">
-              <img src={ASSET + 'welcome.png'} width="1108" height="768" alt="metis desktop 欢迎页截图" />
+              <img src={ASSET + 'welcome.jpg'} width="1108" height="768" alt="metis desktop 欢迎页截图" />
               <figcaption>metis desktop · 欢迎页</figcaption>
             </figure>
           </div>
@@ -105,7 +106,10 @@ export default function TryMetis() {
               {USES.map(u => (
                 <article className="tm-use" key={u.title}>
                   <p className="tm-tag">{u.tag}</p>
-                  <h3>{u.title}</h3>
+                  <h3>
+                    {u.icon && <img className="tm-app-icon" src={ASSET + u.icon} width="26" height="26" alt="" aria-hidden="true" />}
+                    {u.title}
+                  </h3>
                   <p className="tm-use-lead">{u.lead}</p>
                   <dl>
                     {u.items.map(([t, d]) => (

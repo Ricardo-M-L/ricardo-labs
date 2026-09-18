@@ -159,3 +159,7 @@
   .tm-abil-grid, .tm-qa, .tm-shots { grid-template-columns: 1fr; }
   .tm-hero h1 br { display: none; }
 }
+
+/* 桌面端卡片标题旁的 app 图标 */
+.tm-use h3 { display: flex; align-items: center; gap: 10px; }
+.tm-app-icon { border-radius: 6px; display: block; }
