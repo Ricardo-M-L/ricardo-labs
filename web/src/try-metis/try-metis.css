@@ -163,3 +163,42 @@
 /* 桌面端卡片标题旁的 app 图标 */
 .tm-use h3 { display: flex; align-items: center; gap: 10px; }
 .tm-app-icon { border-radius: 6px; display: block; }
+
+/* 平台直下按钮(参照 Claude Code 的 Download 按钮,但按平台拆开) */
+.tm-dl { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.tm-dl-btn {
+  display: flex; flex-direction: column; gap: 3px; padding: 11px 18px;
+  background: var(--slate-dark); color: var(--ivory-light); border: 1px solid var(--slate-dark);
+  border-radius: var(--radius); font-family: var(--font-sans); text-decoration: none;
+  transition: background 200ms ease;
+}
+.tm-dl-btn:hover { background: var(--slate-medium); border-color: var(--slate-medium); }
+.tm-dl-os { display: flex; align-items: center; gap: 8px; font-size: 16px; }
+.tm-dl-os em { font-style: normal; font-size: 11px; padding: 2px 7px; border-radius: 999px; background: rgba(250, 249, 245, 0.18); }
+.tm-dl-meta { font-family: var(--font-mono); font-size: 11.5px; color: rgba(250, 249, 245, 0.72); }
+
+/* CLI 一行命令 + 复制 */
+.tm-cli { margin-top: 18px; }
+.tm-cli-label { font-family: var(--font-sans); font-size: 12px; letter-spacing: .04em; color: var(--cloud-dark); }
+.tm-cmd {
+  display: flex; align-items: center; gap: 12px; margin-top: 8px; padding: 11px 14px;
+  background: var(--ivory-medium); border: 1px solid var(--ivory-dark); border-radius: var(--radius);
+}
+.tm-cmd code {
+  flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--slate-dark);
+}
+.tm-copy {
+  flex: none; padding: 7px 14px; cursor: pointer; background: transparent;
+  border: 1px solid var(--slate-dark); border-radius: var(--radius-sm);
+  font-family: var(--font-sans); font-size: 13px; color: var(--slate-dark);
+}
+.tm-copy:hover { background: var(--slate-dark); color: var(--ivory-light); }
+.tm-cmdwrap { position: relative; }
+.tm-copy-in { position: absolute; top: 18px; right: 12px; background: var(--ivory-light); }
+
+/* 安装区的平台行:文件名可点直下 */
+.tm-plat a { color: inherit; }
+.tm-plat a code { border-bottom: 1px solid rgba(20, 20, 19, 0.28); }
+.tm-plat a:hover code { border-bottom-color: var(--accent); color: var(--accent); }
+.tm-plat span { font-family: var(--font-mono); font-size: 11.5px; color: var(--cloud-dark); }

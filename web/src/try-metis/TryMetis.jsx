@@ -10,6 +10,14 @@ import { Nav, Footer } from '../App'
 const REPO = 'https://github.com/Ricardo-M-L/metis'
 const RELEASES = REPO + '/releases/latest'
 const ASSET = import.meta.env.BASE_URL + 'try-metis/'
+// 直连发行包:点击即下载(releases/latest/download/<asset> 会 302 到 CDN 附件)
+const DL = (n) => REPO + '/releases/latest/download/' + n
+const CURL = 'curl -fsSL https://raw.githubusercontent.com/Ricardo-M-L/metis/main/install/install.sh | bash'
+const DESKTOP = [
+  ['macOS', 'metis-desktop-darwin-universal.dmg', 'dmg · 9.1 MB'],
+  ['Windows', 'metis-desktop-windows-amd64.zip', 'zip · 4.7 MB'],
+  ['Linux', 'metis-desktop-linux-amd64.tar.gz', 'tar.gz · 4.2 MB'],
+]
 
 const Arrow = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
@@ -57,11 +65,7 @@ const SHOTS = [
   ['marketplace.jpg', '插件市场', '浏览、安装插件,按需扩展工具面。'],
 ]
 
-const PLATFORMS = [
-  ['macOS', 'metis-desktop-darwin-universal.zip'],
-  ['Windows', 'metis-desktop-windows-amd64.zip'],
-  ['Linux', 'metis-desktop-linux-amd64.tar.gz'],
-]
+const PLATFORMS = DESKTOP  // 兼容旧引用(安装区仍用)
 
 const FAQ = [
   ['桌面端能单独用吗?', '不能。它把会话、设置与 CLI 执行都委托给本地 metis,所以要先安装 CLI,再下对应平台的桌面端压缩包。'],
@@ -70,6 +74,18 @@ const FAQ = [
 ]
 
 export default function TryMetis() {
+  const [myOS, setMyOS] = React.useState('')
+  const [copied, setCopied] = React.useState(false)
+  const copyCmd = () => {
+    const done = () => { setCopied(true); setTimeout(() => setCopied(false), 1800) }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(CURL).then(done).catch(done)
+    } else { done() }
+  }
+  React.useEffect(() => {
+    const ua = navigator.userAgent
+    setMyOS(/Mac OS X|Macintosh/i.test(ua) ? 'macOS' : /Windows/i.test(ua) ? 'Windows' : /Linux|X11/i.test(ua) ? 'Linux' : '')
+  }, [])
   return (
     <>
       <Nav />
@@ -82,11 +98,22 @@ export default function TryMetis() {
               metis 是本地优先的 Agent CLI:一个静态 Go 二进制、完整的终端界面、多家 provider 的流式输出、MCP 原生,外加持久记忆。
               桌面端是它的原生外壳——同一个内核,不必敲命令。
             </p>
-            <div className="tm-act">
-              <a className="btn btn-primary" href={RELEASES} target="_blank" rel="noreferrer">下载桌面端 <Arrow /></a>
-              <a className="btn btn-secondary" href={REPO + '#install'} target="_blank" rel="noreferrer">看 CLI 安装 <Arrow /></a>
+            <div className="tm-dl">
+              {DESKTOP.map(([os, file, meta]) => (
+                <a className="tm-dl-btn" key={os} href={DL(file)} download>
+                  <span className="tm-dl-os">{os}{os === myOS && <em>你的系统</em>}</span>
+                  <span className="tm-dl-meta">{meta}</span>
+                </a>
+              ))}
             </div>
-            <p className="tm-note">最新版本 v0.4.59 · 桌面端需先安装 CLI · 许可:依仓库声明</p>
+            <div className="tm-cli">
+              <p className="tm-cli-label">CLI,一行装好</p>
+              <div className="tm-cmd">
+                <code>{CURL}</code>
+                <button type="button" className="tm-copy" onClick={copyCmd}>{copied ? '已复制' : '复制'}</button>
+              </div>
+            </div>
+            <p className="tm-note">最新版本 v0.4.59 · 桌面端需先安装 CLI · 三个包都是直连下载 · 许可:依仓库声明</p>
           </div>
         </header>
 
@@ -160,17 +187,24 @@ export default function TryMetis() {
             <div className="tm-install-grid">
               <div>
                 <p className="tm-step">第一步 · CLI</p>
-                <pre className="tm-code"><code>{'curl -fsSL https://raw.githubusercontent.com/Ricardo-M-L/metis/main/install/install.sh | bash'}</code></pre>
+                <div className="tm-cmdwrap">
+                  <pre className="tm-code"><code>{CURL}</code></pre>
+                  <button type="button" className="tm-copy tm-copy-in" onClick={copyCmd}>{copied ? '已复制' : '复制'}</button>
+                </div>
                 <p className="tm-note">macOS / Linux 均可用,装完执行 metis version 确认。</p>
               </div>
               <div>
                 <p className="tm-step">第二步 · 桌面端</p>
                 <ul className="tm-plat">
-                  {PLATFORMS.map(([os, file]) => (
-                    <li key={os}><b>{os}</b><code>{file}</code></li>
+                  {DESKTOP.map(([os, file, meta]) => (
+                    <li key={os}>
+                      <b>{os}</b>
+                      <a href={DL(file)} download><code>{file}</code></a>
+                      <span>{meta}</span>
+                    </li>
                   ))}
                 </ul>
-                <p className="tm-note">压缩包在 <a href={RELEASES} target="_blank" rel="noreferrer">最新发行版 <Arrow /></a> 里;macOS 解包后把 app 拖进应用程序目录。</p>
+                <p className="tm-note">点文件名就直接下载(直连最新发行版);macOS 的 dmg 打开后把 app 拖进应用程序目录。</p>
               </div>
             </div>
           </div>
@@ -194,9 +228,16 @@ export default function TryMetis() {
           <div className="shell">
             <h2>先装 CLI,再开桌面端</h2>
             <p>源码、发行包与 issue 都在公开仓库里;终端和桌面端跑的是同一套循环。</p>
+            <div className="tm-dl">
+              {DESKTOP.map(([os, file, meta]) => (
+                <a className="tm-dl-btn" key={os} href={DL(file)} download>
+                  <span className="tm-dl-os">{os}</span>
+                  <span className="tm-dl-meta">{meta}</span>
+                </a>
+              ))}
+            </div>
             <div className="tm-act">
-              <a className="btn btn-primary" href={REPO} target="_blank" rel="noreferrer">仓库 <Arrow /></a>
-              <a className="btn btn-secondary" href={RELEASES} target="_blank" rel="noreferrer">发布记录 <Arrow /></a>
+              <a className="btn btn-secondary" href={REPO} target="_blank" rel="noreferrer">仓库 <Arrow /></a>
               <a className="btn btn-secondary" href={REPO + '/issues'} target="_blank" rel="noreferrer">Issues <Arrow /></a>
             </div>
           </div>
