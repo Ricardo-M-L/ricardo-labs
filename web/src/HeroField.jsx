@@ -20,8 +20,8 @@ const BLOBS = [
 
 // [angle, y%, 带宽%, alpha, 摆动速度, tint, 三角波周期秒] —— 末项 >0 时用匀速三角波往复(速度恒定),0 则用摆动
 const BANDS = [
-  [-0.38, 0.60, 0.44, 0.17, 0, '226,190,120', 90],
-  [-0.22, 0.16, 0.30, 0.13, 0.031, '196,120,84', 0],
+  [-0.38, 0.60, 0.44, 0.23, 0, '226,190,120', 78],
+  [-0.22, 0.16, 0.30, 0.18, 0.031, '196,120,84', 0],
 ]
 
 export default function HeroField() {
@@ -83,8 +83,8 @@ export default function HeroField() {
         const y = (cy + c * dy) * h
         const rad = Math.max(1, r * Math.min(w, h) * (1 + 0.06 * Math.sin(time * sp * 1.3 + ph)))
         const g = ctx.createRadialGradient(x, y, 0, x, y, rad)
-        g.addColorStop(0, `rgba(${rgb},.50)`)
-        g.addColorStop(0.45, `rgba(${rgb},.19)`)
+        g.addColorStop(0, `rgba(${rgb},.64)`)
+        g.addColorStop(0.45, `rgba(${rgb},.27)`)
         g.addColorStop(1, `rgba(${rgb},0)`)
         ctx.fillStyle = g
         ctx.beginPath()
