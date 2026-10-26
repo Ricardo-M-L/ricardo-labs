@@ -14,9 +14,9 @@ const ASSET = import.meta.env.BASE_URL + 'try-metis/'
 const DL = (n) => REPO + '/releases/latest/download/' + n
 const CURL = 'curl -fsSL https://raw.githubusercontent.com/Ricardo-M-L/metis/main/install/install.sh | bash'
 const DESKTOP = [
-  ['macOS', 'metis-desktop-darwin-universal.dmg', 'dmg · 9.1 MB'],
-  ['Windows', 'metis-desktop-windows-amd64.zip', 'zip · 4.7 MB'],
-  ['Linux', 'metis-desktop-linux-amd64.tar.gz', 'tar.gz · 4.2 MB'],
+  ['macOS', 'metis-desktop-darwin-universal.dmg', 'dmg · Universal'],
+  ['Windows', 'metis-desktop-windows-amd64.zip', 'zip · x64'],
+  ['Linux', 'metis-desktop-linux-amd64.tar.gz', 'tar.gz · x64'],
 ]
 
 const Arrow = () => (
@@ -70,7 +70,7 @@ const PLATFORMS = DESKTOP  // 兼容旧引用(安装区仍用)
 const FAQ = [
   ['桌面端能单独用吗?', '不能。它把会话、设置与 CLI 执行都委托给本地 metis,所以要先安装 CLI,再下对应平台的桌面端压缩包。'],
   ['什么许可?', '依仓库声明,不是 MIT。本页与站点都没有把 metis 标成 MIT。'],
-  ['从源码构建要什么?', 'Go 1.25.8 或更新,加上 Wails CLI v2.12.x 与 Wails 要求的平台依赖(用 wails doctor 自检)。直接下发行包的话不需要这些。'],
+  ['从源码构建要什么?', '按仓库当前构建说明安装 Go、Wails CLI 和平台依赖(用 wails doctor 自检)。具体要求以仓库为准;直接下载发行包不需要构建工具。'],
 ]
 
 export default function TryMetis() {
@@ -108,7 +108,7 @@ export default function TryMetis() {
                 <button type="button" className="tm-copy" onClick={copyCmd}>{copied ? '已复制' : '复制'}</button>
               </div>
             </div>
-            <p className="tm-note">最新版本 v0.4.59 · 桌面端需先安装 CLI · 三个包都是直连下载 · 许可:依仓库声明</p>
+            <p className="tm-note">下载始终指向最新发布 · 桌面端需先安装 CLI · 许可:依仓库声明</p>
           </div>
         </header>
 

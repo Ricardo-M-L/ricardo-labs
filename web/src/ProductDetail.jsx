@@ -36,7 +36,7 @@ const DETAILS = [
   },
   {
     id: 'p-ifscape',
-    eyebrow: '03 · TypeScript + Rust · 本地预览 · MIT',
+    eyebrow: '03 · TypeScript + Rust · 开发者预览 · MPL-2.0',
     title: 'Ifscape',
     lead: '后果工作室,也叫 Living Atlas:在想清楚之前,先把后果摆到桌面上——但只摆有限的几个。',
     points: [
@@ -45,19 +45,20 @@ const DETAILS = [
       ['提交门只对人打开', '机器可以提议、可以推演、可以算代价,落地那一步必须由人签。'],
     ],
     code: ['intent → futures[2..4] → stakes', 'label: model-prediction', 'gate: human-only'],
-    links: [['作者主页', 'https://github.com/Ricardo-M-L']],
+    links: [['仓库', 'https://github.com/Ricardo-M-L/ifscape'], ['使用说明', 'https://github.com/Ricardo-M-L/ifscape/blob/main/docs/USER_GUIDE.md'], ['架构与模型接入', 'https://github.com/Ricardo-M-L/ifscape/blob/main/docs/ARCHITECTURE.md']],
+    note: '当前公开开发者预览源码。默认演示可离线运行;语义代码/PPT 生成需配置模型,世界模型可选接入。正式桌面安装包尚未发布。',
   },
   {
     id: 'p-metis',
     eyebrow: '04 · Go · CLI · 许可:依仓库声明',
     title: 'metis',
-    lead: '本地优先的 Agent CLI:一个流式循环、16 个内置工具、多家 LLM、三层记忆,在终端里跑;也能作为 ACP server 被别的客户端接进去。',
+    lead: '本地优先的 Agent CLI:一个流式循环、内置工具、多家 LLM、三层记忆,在终端里跑;也能作为 ACP server 被别的客户端接进去。',
     points: [
       ['边生成边执行', '流式 agent loop:模型输出、工具调用与结果在同一条流里推进,不用等整段回复落地。'],
-      ['工具与模型都可换', '16 个内置工具开箱可用,不用自己拼工具层;provider 只换一行配置,循环本身不动。'],
+      ['工具与模型都可换', '内置工具开箱可用,也能通过 MCP 扩展;模型 provider 可通过配置切换。'],
       ['记忆分三层(Core / Archival / Recall)', 'Core 区块放常驻约束,Archival 以 JSONL 归档发生过的事,Recall 按需检索历史:三者不混在一个池子里。'],
     ],
-    code: ['loop:    stream → tool call → observe', 'tools:   16 个内置', 'memory:  core / archival / recall', 'latest:  v0.4.59'],
+    code: ['loop:    stream → tool call → observe', 'tools:   built-in + MCP', 'memory:  core / archival / recall'],
     links: [['Try metis(桌面端)', import.meta.env.BASE_URL + 'try-metis/'], ['仓库', 'https://github.com/Ricardo-M-L/metis'], ['发布记录', 'https://github.com/Ricardo-M-L/metis/releases/latest'], ['Issues', 'https://github.com/Ricardo-M-L/metis/issues']],
     note: '许可:依仓库声明(不是 MIT)',
   },

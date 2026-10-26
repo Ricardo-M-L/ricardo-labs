@@ -4,6 +4,7 @@ import ProductDetails from './ProductDetail'
 
 const GITHUB = 'https://github.com/Ricardo-M-L'
 const METIS = 'https://github.com/Ricardo-M-L/metis'
+const IFSCAPE = 'https://github.com/Ricardo-M-L/ifscape'
 // 「Try metis」独立页(GitHub Pages 是静态托管,用真实 HTML 入口而不是前端路由)
 const HOME = import.meta.env.BASE_URL
 const HOME_P = import.meta.env.BASE_URL
@@ -101,7 +102,7 @@ const ArtLoop = () => (
     <g fontSize="10.5" fontFamily="JetBrains Mono, monospace" fill="rgba(20,20,19,.8)">
       <text x="15" y="70">prompt</text>
       <text x="106" y="32">stream</text>
-      <text x="106" y="70">tool call ×16</text>
+      <text x="106" y="70">tool call</text>
       <text x="106" y="108">observe</text>
       <text x="247" y="34">core</text>
       <text x="247" y="64">archival</text>
@@ -131,17 +132,26 @@ const PRODUCTS = [
     links: [['了解详情', '#p-agent-memory'], ['仓库', 'https://github.com/Ricardo-M-L/agent-memory']],
   },
   {
-    id: 'ifscape', tone: 't-kraft', label: '03 · TypeScript + Rust · 本地预览',
+    id: 'ifscape', tone: 't-kraft', label: '03 · TypeScript + Rust · 开发者预览',
     title: 'Ifscape', desc: '后果工作室:每次规划只给 2–4 个有界的候选未来,推演结果一律标注 model-prediction,提交门只对人打开。',
     art: <ArtFutures />,
-    links: [['了解详情', '#p-ifscape'], ['作者主页', GITHUB]],
+    links: [['了解详情', '#p-ifscape'], ['仓库', IFSCAPE], ['使用说明', IFSCAPE + '/blob/main/docs/USER_GUIDE.md']],
   },
   {
     id: 'metis', tone: 't-cactus', label: '04 · Go · CLI',
-    title: 'metis', desc: '本地优先的 Agent CLI:流式 agent loop、16 个内置工具、多 provider LLM,记忆分 core / archival / recall 三层,终端里跑,也能当 ACP server 被别的客户端调用;另有一个原生桌面端。',
+    title: 'metis', desc: '本地优先的 Agent CLI:流式 agent loop、内置工具、多 provider LLM,记忆分 core / archival / recall 三层,终端里跑,也能当 ACP server 被别的客户端调用;另有一个原生桌面端。',
     art: <ArtLoop />,
     links: [['了解详情', '#p-metis'], ['Try metis', TRY], ['仓库', METIS], ['发布记录', METIS + '/releases/latest']],
   },
+]
+
+const MORE_PROJECTS = [
+  ['agent-apprentice', 'TypeScript', '本地优先的桌面 Agent 学习与练习工作室。'],
+  ['metis-cu', 'Go', '为 Metis 提供计算机操作能力的 MCP 服务。'],
+  ['mcphub', 'Go', '通过命令行搜索、安装和管理 MCP 服务。'],
+  ['anthrogo', 'Go', 'Agent CLI,提供终端、无界面运行、HTTP 服务和 Web 界面。'],
+  ['claude-skills', 'Skills', 'Claude Code 技能集合,包含中文开发者工具。'],
+  ['synapse-ai', 'TypeScript', '轻量个人 AI 助手。'],
 ]
 
 const STAGE_CODE = [
@@ -155,9 +165,9 @@ const STAGE_CODE = [
 ]
 
 const NOTES = [
-  ['R-01', '#d97757', '从 Proxy 到类型系统:一次 DI 框架的 Rust 移植', 'JS 动态代理的魔法,到了 Rust 变成显式工厂、显式作用域和编译期可查的查找。', '工程笔记 · 9 月'],
-  ['R-02', '#6a9bcc', 'Agent 记忆的三个时间尺度', '工作记忆撑住一次会话,情景记忆串起整条轨迹,语义记忆沉淀可复用的事实。', '工程笔记 · 8 月'],
-  ['R-03', '#788c5d', '把"未来"做成可审查的分支', '推演不冒充预言:候选分支有界、结论标注来源、提交前必须有人点头。', '设计记录 · 8 月'],
+  ['R-01', '#d97757', '从 Proxy 到类型系统:一次 DI 框架的 Rust 移植', 'JS 动态代理的魔法,到了 Rust 变成显式工厂、显式作用域和编译期可查的查找。', '项目文档', 'https://github.com/Ricardo-M-L/cordis-di#readme'],
+  ['R-02', '#6a9bcc', 'Agent 记忆的三个时间尺度', '工作记忆撑住一次会话,情景记忆串起整条轨迹,语义记忆沉淀可复用的事实。', '项目文档', 'https://github.com/Ricardo-M-L/agent-memory#readme'],
+  ['R-03', '#788c5d', '把"未来"做成可审查的分支', '推演不冒充预言:候选分支有界、结论标注来源、提交前必须有人点头。', '设计记录', IFSCAPE + '/blob/main/docs/REFERENCE_DESIGN.md'],
 ]
 
 /* ---------- 组件 ---------- */
@@ -169,16 +179,18 @@ const MENU = [
     ['agent-memory', HOME_P + '#p-agent-memory'],
     ['Ifscape', HOME_P + '#p-ifscape'],
     ['metis', HOME_P + '#p-metis'],
+    ['更多开源项目', HOME_P + '#more-projects'],
   ]],
   ['源码', [
     ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
     ['agent-memory 仓库', 'https://github.com/Ricardo-M-L/agent-memory'],
+    ['Ifscape 仓库', IFSCAPE],
     ['metis 仓库', METIS],
     ['crates.io · cordis-di-core', 'https://crates.io/crates/cordis-di-core'],
   ]],
   ['metis', [
     ['Try metis(桌面端 + CLI)', TRY],
-    ['最新版本 v0.4.59', METIS + '/releases/latest'],
+    ['最新发布', METIS + '/releases/latest'],
     ['README', METIS + '#readme'],
     ['Issues', METIS + '/issues'],
     ['作者主页', GITHUB],
@@ -197,7 +209,7 @@ const GithubMark = () => (
   </svg>
 )
 
-const isExt = (href) => !(href.startsWith('#') || href === TRY)
+const isExt = (href) => /^https?:\/\//.test(href)
 
 export function Nav() {
   const [open, setOpen] = React.useState(false)
@@ -281,18 +293,18 @@ function Hero() {
       <div className="shell">
         <h1>为 Agent 造地基:<i>装得稳</i>、<i>记得住</i>、看得见后果。</h1>
         <p className="sub">
-          四个开源项目,四条工程主张——确定性生命周期、可审计的持久记忆、把推演变成可提交的分支,以及一个本地优先的 Agent CLI。均以源码开放。
+          从类型化插件、持久记忆,到可审查的候选未来与本地 Agent CLI。这里收录重点产品与更多开源工具,源码、使用说明和发布入口可直接查看。
         </p>
         <div className="hero-act">
-          <a className="btn btn-primary" href="#products">浏览四个产品 <Arrow /></a>
+          <a className="btn btn-primary" href="#products">浏览项目 <Arrow /></a>
           <a className="btn btn-secondary" href="https://crates.io/crates/cordis-di-core" target="_blank" rel="noreferrer">
             <span className="mono" style={{ fontSize: 14 }}>cargo add cordis-di-core</span>
           </a>
         </div>
         <div className="hero-meta">
-          <span>MIT 许可(metis 依仓库声明)</span>
+          <span>许可证见各项目仓库</span>
           <span>9 个 crate</span>
-          <span>77 个上游合并 PR</span>
+          <span>参与 Agent 工具链上游贡献</span>
           <span>维护者 Ricardo-M-L</span>
         </div>
       </div>
@@ -341,7 +353,7 @@ function Products() {
   return (
     <section className="shell releases" id="products">
       <div className="sec-head">
-        <h2>四个项目</h2>
+        <h2>重点项目</h2>
         <a className="detail" href={GITHUB} target="_blank" rel="noreferrer">全部仓库 ↗</a>
       </div>
       <div className="cards-4">
@@ -366,6 +378,25 @@ function Products() {
   )
 }
 
+function MoreProjects() {
+  return (
+    <section className="shell notes" id="more-projects" aria-labelledby="more-projects-title">
+      <div className="sec-head">
+        <h2 id="more-projects-title">更多开源项目</h2>
+        <a className="detail" href={GITHUB + '?tab=repositories'} target="_blank" rel="noreferrer">全部仓库 ↗</a>
+      </div>
+      {MORE_PROJECTS.map(([name, language, description]) => (
+        <a className="note" key={name} href={GITHUB + '/' + name} target="_blank" rel="noreferrer">
+          <span className="note-tile" style={{ background: '#788c5d' }} aria-hidden="true">↗</span>
+          <span><h3>{name}</h3><p>{description}</p></span>
+          <span className="who">{language} · GitHub</span>
+          <span className="go"><Ext /></span>
+        </a>
+      ))}
+    </section>
+  )
+}
+
 function Claim() {
   return (
     <section className="claim" id="claim">
@@ -378,10 +409,10 @@ function Claim() {
           </p>
         </div>
         <div className="stats">
-          <div className="stat"><b>77</b><span>已合并的上游 PR(agent 工具链生态)</span></div>
+          <a className="stat" href="https://github.com/pulls?q=is%3Apr+author%3ARicardo-M-L+is%3Amerged" target="_blank" rel="noreferrer"><b>PR</b><span>查看 Agent 工具链生态的上游贡献</span></a>
           <div className="stat"><b>9</b><span>cordis-di 独立 crate,已发布 crates.io</span></div>
-          <div className="stat"><b>4</b><span>开源产品:框架 / 记忆 / 后果工作室 / Agent CLI</span></div>
-          <div className="stat"><b>MIT</b><span>许可,无商业限制(metis 依仓库声明)</span></div>
+          <div className="stat"><b>4</b><span>重点项目:框架 / 记忆 / 后果工作室 / Agent CLI</span></div>
+          <div className="stat"><b>MPL</b><span>Ifscape 为 MPL-2.0,其余项目见各仓库许可证</span></div>
         </div>
       </div>
     </section>
@@ -395,8 +426,8 @@ function Notes() {
         <h2>工程笔记</h2>
         <a className="detail" href="#top">回到顶部 ↑</a>
       </div>
-      {NOTES.map(([no, tint, title, desc, who]) => (
-        <a key={no} className="note" href={'#' + no.toLowerCase()}>
+      {NOTES.map(([no, tint, title, desc, who, href]) => (
+        <a key={no} className="note" href={href} target="_blank" rel="noreferrer">
           <span className="note-tile" style={{ background: tint }}>{no}</span>
           <span>
             <h3>{title}</h3>
@@ -414,7 +445,7 @@ function Cta() {
   return (
     <section className="shell cta">
       <h2>先读源码,再决定要不要用。</h2>
-      <p>四个项目都在公开仓库里,提交历史、测试与发布流程可查。欢迎在 issue 里直接挑战设计。</p>
+      <p>从各项目仓库查看源码、使用说明和测试。Ifscape 当前提供开发者预览源码,桌面安装包的发布状态以仓库为准。欢迎在 issue 里讨论设计。</p>
       <div className="cta-act">
         <a className="btn btn-primary" href={GITHUB} target="_blank" rel="noreferrer">打开 GitHub <Ext /></a>
         <a className="btn btn-secondary" href="https://docs.rs/cordis-di-core" target="_blank" rel="noreferrer">读文档</a>
@@ -428,9 +459,9 @@ function Cta() {
 const FOOT = [
   [
     ['产品', [
-      ['cordis-di', '#cordis-di'],
-      ['agent-memory', '#agent-memory'],
-      ['Ifscape', '#ifscape'],
+      ['cordis-di', HOME_P + '#cordis-di'],
+      ['agent-memory', HOME_P + '#agent-memory'],
+      ['Ifscape', HOME_P + '#ifscape'],
       ['metis', METIS],
     ]],
     ['资源', [
@@ -443,13 +474,15 @@ const FOOT = [
     ['源码', [
       ['cordis-di 仓库', 'https://github.com/Ricardo-M-L/cordis-di'],
       ['agent-memory 仓库', 'https://github.com/Ricardo-M-L/agent-memory'],
+      ['Ifscape 仓库', IFSCAPE],
+      ['Ifscape 使用说明', IFSCAPE + '/blob/main/docs/USER_GUIDE.md'],
       ['metis 仓库', METIS],
       ['metis 发布记录', METIS + '/releases'],
     ]],
   ],
   [
     ['metis', [
-      ['最新版本 v0.4.59', METIS + '/releases/latest'],
+      ['最新发布', METIS + '/releases/latest'],
       ['README', METIS + '#readme'],
       ['Issues', METIS + '/issues'],
       ['作者主页', GITHUB],
@@ -457,10 +490,11 @@ const FOOT = [
   ],
   [
     ['站点', [
-      ['产品总览', '#products'],
-      ['工程笔记', '#notes'],
-      ['关于本站', '#claim'],
-      ['回到顶部', '#top'],
+      ['产品总览', HOME_P + '#products'],
+      ['更多开源项目', HOME_P + '#more-projects'],
+      ['工程笔记', HOME_P + '#notes'],
+      ['关于本站', HOME_P + '#claim'],
+      ['回到顶部', HOME_P + '#top'],
     ]],
   ],
 ]
@@ -472,7 +506,7 @@ export function Footer() {
         <div className="foot-brandcol">
           <p className="foot-brand">Ricardo Labs</p>
           <p className="blurb">为 Agent 工程造地基:确定性生命周期、可审计记忆、可提交的推演,以及一个本地优先的 Agent CLI。</p>
-          <p className="foot-copy">© 2026 Ricardo Labs · cordis-di / agent-memory / Ifscape 为 MIT 许可,metis 依仓库声明</p>
+          <p className="foot-copy">© 2026 Ricardo Labs · Ifscape 为 MPL-2.0;cordis-di / agent-memory 为 MIT;其他项目依仓库声明</p>
           <div className="foot-social">
             <a href={GITHUB} target="_blank" rel="noreferrer" aria-label="GitHub"><GithubMark /></a>
           </div>
@@ -523,6 +557,7 @@ export default function App() {
       <Stage />
       <Products />
       <ProductDetails />
+      <MoreProjects />
       <Claim />
       <Notes />
       <Cta />

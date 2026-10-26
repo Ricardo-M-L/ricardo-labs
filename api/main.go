@@ -21,9 +21,10 @@ type product struct {
 }
 
 var products = []product{
-	{ID: "cordis-di", Name: "cordis-di", Zh: "类型化插件与依赖注入框架", Lang: "Rust", Status: "v0.1.0 · crates.io", URL: "https://github.com/Ricardo-M-L/cordis-di"},
-	{ID: "agent-memory", Name: "agent-memory", Zh: "Agent 持久化记忆(SQLite / Neo4j)", Lang: "Rust", Status: "v0.1.1 · MIT", URL: "https://github.com/Ricardo-M-L/agent-memory"},
-	{ID: "ifscape", Name: "Ifscape", Zh: "后果工作室 · Living Atlas", Lang: "TypeScript + Rust", Status: "pre-alpha · 本地预览", URL: "https://github.com/Ricardo-M-L"},
+	{ID: "cordis-di", Name: "cordis-di", Zh: "类型化插件与依赖注入框架", Lang: "Rust", Status: "crates.io · MIT", URL: "https://github.com/Ricardo-M-L/cordis-di"},
+	{ID: "agent-memory", Name: "agent-memory", Zh: "Agent 持久化记忆(SQLite / Neo4j)", Lang: "Rust", Status: "MIT", URL: "https://github.com/Ricardo-M-L/agent-memory"},
+	{ID: "ifscape", Name: "Ifscape", Zh: "后果工作室 · Living Atlas", Lang: "TypeScript + Rust", Status: "开发者预览 · MPL-2.0", URL: "https://github.com/Ricardo-M-L/ifscape"},
+	{ID: "metis", Name: "metis", Zh: "本地优先 Agent CLI 与桌面端", Lang: "Go", Status: "最新发布见仓库", URL: "https://github.com/Ricardo-M-L/metis"},
 }
 
 func apiMux() http.Handler {

@@ -1,12 +1,23 @@
 # Ricardo Labs
 
-Ricardo 的三个 Agent 基础设施项目的官方展示站,风格参考 openai.com。
+Ricardo 的开源项目展示站,包含重点产品、更多 Agent 工具以及 Metis 下载入口。
 
 | 产品 | 定位 | 仓库 |
 | --- | --- | --- |
 | cordis-di | Rust 类型化插件与依赖注入框架 | https://github.com/Ricardo-M-L/cordis-di |
 | agent-memory | Rust Agent 持久化记忆(SQLite/Neo4j) | https://github.com/Ricardo-M-L/agent-memory |
-| Ifscape | Agent 后果工作室 · Living Atlas | 本地项目(暂未公开) |
+| Ifscape | Agent 后果工作室 · Living Atlas(开发者预览,MPL-2.0) | https://github.com/Ricardo-M-L/ifscape |
+| metis | 本地优先 Agent CLI 与桌面端 | https://github.com/Ricardo-M-L/metis |
+
+更多项目区还展示 `agent-apprentice`、`metis-cu`、`mcphub`、`anthrogo`、
+`claude-skills` 和 `synapse-ai`。旧实验和配套仓库可通过「全部仓库」查看。
+
+页面不固定产品版本号、下载包大小或构建工具版本。发布入口使用
+`releases/latest`,Metis 下载使用 `releases/latest/download/<asset>`;
+源码构建要求以对应项目仓库为准。
+
+Ifscape 提供源码和中英文使用说明,尚未发布正式签名、公证的桌面安装包。
+各项目许可证分别以各自仓库为准。
 
 ## 结构
 

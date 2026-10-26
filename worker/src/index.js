@@ -8,7 +8,7 @@ const products = [
     name: 'cordis-di',
     zh: '类型化插件与依赖注入框架',
     lang: 'Rust',
-    status: 'v0.1.0 · crates.io',
+    status: 'crates.io · MIT',
     url: 'https://github.com/Ricardo-M-L/cordis-di',
   },
   {
@@ -16,7 +16,7 @@ const products = [
     name: 'agent-memory',
     zh: 'Agent 持久化记忆(SQLite / Neo4j)',
     lang: 'Rust',
-    status: 'v0.1.1 · MIT',
+    status: 'MIT',
     url: 'https://github.com/Ricardo-M-L/agent-memory',
   },
   {
@@ -24,8 +24,16 @@ const products = [
     name: 'Ifscape',
     zh: '后果工作室 · Living Atlas',
     lang: 'TypeScript + Rust',
-    status: 'pre-alpha · 本地预览',
-    url: 'https://github.com/Ricardo-M-L',
+    status: '开发者预览 · MPL-2.0',
+    url: 'https://github.com/Ricardo-M-L/ifscape',
+  },
+  {
+    id: 'metis',
+    name: 'metis',
+    zh: '本地优先 Agent CLI 与桌面端',
+    lang: 'Go',
+    status: '最新发布见仓库',
+    url: 'https://github.com/Ricardo-M-L/metis',
   },
 ];
 
